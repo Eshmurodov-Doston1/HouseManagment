@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/title"
+        android:paddingVertical="@dimen/_4sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintHorizontal_bias="0.2"
+        android:text="Глобальные кассы"
+        android:textStyle="bold"
+        android:textSize="@dimen/_14sdp"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:textColor="@color/textColor"
+        android:fontFamily="@font/inter_medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_cash_ite"
+        android:nestedScrollingEnabled="false"
+        tools:listitem="@layout/item_cash_child"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_weight="1"
+        android:paddingVertical="@dimen/_4sdp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/location_all"
+            android:text="Всего"
+            android:textColor="@color/item_all_color"
+            android:textSize="@dimen/_11sdp"
+            android:textStyle="bold"
+            android:fontFamily="@font/inter_medium"
+            android:paddingLeft="@dimen/_11sdp"
+            android:gravity="left"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="RtlHardcoded,RtlSymmetry" />
+        <TextView
+            android:id="@+id/summ_all"
+            android:paddingEnd="@dimen/_11sdp"
+            android:text="72 332 руб"
+            android:textColor="@color/item_all_color"
+            android:textSize="@dimen/_11sdp"
+            android:textStyle="bold"
+            android:fontFamily="@font/inter_medium"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="RtlHardcoded,RtlSymmetry" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</LinearLayout>

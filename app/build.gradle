@@ -1,0 +1,107 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.example.housemanagment"
+        minSdk 21
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "String", "BASE_URL", "\"http://building.gx.uz\""
+        }
+        release {
+            minifyEnabled false
+            buildConfigField "String", "BASE_URL", "\"http://building.gx.uz\""
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.0'
+    implementation 'com.google.firebase:firebase-crashlytics-buildtools:2.9.1'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    // ViewBinding
+    implementation 'com.github.yogacp:android-viewbinding:1.0.4'
+    // themeApp
+    implementation "com.dolatkia:animated-theme-manager:1.1.4"
+    // sdp
+    implementation 'com.intuit.sdp:sdp-android:1.1.0'
+    // lottieAnimation
+    implementation 'com.airbnb.android:lottie:5.2.0'
+    // shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    //paging3
+    def paging_version = "3.1.1"
+    implementation "androidx.paging:paging-runtime:$paging_version"
+    //materialShadow
+    implementation 'com.h6ah4i.android.materialshadowninepatch:materialshadowninepatch:1.0.0'
+    // chart
+    implementation 'com.github.STRAIBERRY-AI-INC:Straiberry-charts:1.1.0'
+    //swipeRefreshLayout
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    implementation 'com.daimajia.androidanimations:library:2.4@aar'
+    // coil
+    implementation "io.coil-kt:coil:2.1.0"
+    // permission checked
+    implementation 'com.guolindev.permissionx:permissionx:1.6.4'
+    // zoom  image
+    implementation 'io.github.imablanco:zoomy:1.0.0'
+    // dataTable
+    implementation 'com.github.salehyarahmadi:DataTable:1.0.1'
+    // switch
+    implementation 'com.github.zcweng:switch-button:0.0.3@aar'
+    //Room
+    def roomVersion = "2.4.2"
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
+    //hilt
+    implementation "com.google.dagger:hilt-android:2.42"
+    kapt "com.google.dagger:hilt-android-compiler:2.41"
+    implementation 'com.github.MohammadSianaki:Retrofit2-Flow-Call-Adapter:0.2.0'
+    //retrofit
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    //interCeptor
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.6'
+    //coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
+    // internet connection
+    implementation 'com.github.JobGetabu:DroidNet:2.0.0'
+    // Timber
+    implementation 'com.jakewharton.timber:timber:5.0.1'
+    // Chucker Android studio
+//    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
+//    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
+}

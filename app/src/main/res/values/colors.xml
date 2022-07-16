@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+<!--    LightTheme-->
+    <color name="backgroundColor">#F7FAFC</color>
+    <color name="backgroundColor_Tool">#F7FAFC</color>
+    <color name="textColor">#000000</color>
+    <color name="textColor_item_table">#C4000000</color>
+    <color name="textColor_item">#99000000</color>
+    <color name="buttonColor">#2757FF</color>
+    <color name="emptyTextButtonColor">#4F4F4F</color>
+    <color name="hintColor">#4F4F4F</color>
+    <color name="shadow_color">#D5C6C2C2</color>
+    <color name="buttonEmpty">#4F4F4F</color>
+    <color name="buttonFull">#2757FF</color>
+    <color name="ok_btn_color">#3AC737</color>
+    <color name="no_btn_color">#FF4400</color>
+    <color name="chat_from_color">#2757FF</color>
+    <color name="itemTo_color">#7000FF</color>
+    <color name="collepsing_color">#F7FAFC</color>
+    <color name="line_table_color">#E3E1E1</color>
+    <color name="no_internet_color">#77EC0404</color>
+
+
+    <color name="shimmer_color">#36575757</color>
+    <color name="shimmer_item_color">#8D575757</color>
+    <color name="line_color">#BEBEBE</color>
+    <color name="main_date_color">#777777</color>
+    <color name="main_card_first_color">#42B5CE</color>
+    <color name="main_card_second_color">#37C734</color>
+    <color name="main_card_three_color">#4F4F4F</color>
+    <color name="main_card_four_color">#3C67FF</color>
+    <color name="item_all_color">#1D1CFF</color>
+    <color name="back">#F7FAFC</color>
+    <color name="text_cash_color">#2757FF</color>
+    <color name="color_call">#2757FF</color>
+    <color name="card_call_color">#5B5076FA</color>
+    <color name="item_color_line">#4B4AFF</color>
+    <color name="image_empty_color">#D9D9D9</color>
+    <color name="sms_color">#C4C3FF</color>
+    <color name="call_color">#C8FFC3</color>
+    <color name="image_cash_color">#4F587AEF</color>
+    <color name="image_card_color">#FFE0E0</color>
+    <color name="logout_color">#FF2525</color>
+    <!--    LightTheme-->
+<!--DarkTheme-->
+    <color name="backgroundDarkColor">#212025</color>
+    <color name="backgroundDarkColor_Tool">#2A2B31</color>
+    <color name="textDarkColor">#FFFFFF</color>
+    <color name="buttonDarkColor">#2757FF</color>
+    <color name="emptyTextButtonDarkColor">#4F4F4F</color>
+    <color name="hintDarkColor">#FFFFFF</color>
+    <color name="line_color_dark">#777777</color>
+    <!--DarkTheme-->
+    <array name="BrushingChartColor">
+        <item name="red_color">@color/no_btn_color</item>
+        <item name="yellow_color">@color/ok_btn_color</item>
+        <item name="blue_color">@color/buttonFull</item>
+        <item name="red_color">@color/no_btn_color</item>
+        <item name="yellow_color">@color/ok_btn_color</item>
+        <item name="blue_color">@color/buttonFull</item>
+        <item name="blue_color">@color/buttonFull</item>
+    </array>
+
+</resources>
