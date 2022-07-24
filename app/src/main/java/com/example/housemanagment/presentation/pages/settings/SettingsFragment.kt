@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.dolatkia.animatedThemeManager.AppTheme
 import com.example.housemanagment.R
 import com.example.housemanagment.databinding.FragmentSettingsBinding
 import com.example.housemanagment.presentation.activitys.AuthActivity
@@ -21,7 +22,6 @@ import kotlinx.coroutines.launch
 class SettingsFragment : BasePage(R.layout.fragment_settings) {
     private var _binding:FragmentSettingsBinding?= null
     private val binding get() = _binding!!
-    private val appCompositionRoot get() = (activity as MainActivity).appCompositionRoot
     private val authViewModel:AuthViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +29,6 @@ class SettingsFragment : BasePage(R.layout.fragment_settings) {
     ): View {
         _binding = FragmentSettingsBinding.inflate(inflater,container,false)
         bindingView = binding
-        appCompositionRootBase = appCompositionRoot
         return binding.root
     }
 
@@ -37,18 +36,23 @@ class SettingsFragment : BasePage(R.layout.fragment_settings) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             themeCheckBox.isChecked = authViewModel.sharedPreferences.theme ?:false
-            cardLogout.setOnClickListener {
-                appCompositionRoot.otherDialog(ZERO){
-                    if (it){
-                        authViewModel.logOut()
-                        launch {
-                            authViewModel.logOut.fetchResult(appCompositionRoot.uiControllerApp){ logOutRes->
-                                appCompositionRoot.customToast(logOutRes?.message.toString())
-                                authViewModel.sharedPreferences.clear()
-                                launch { authViewModel.deleteUserTable() }
-                                appCompositionRoot.mActivity.startNewActivity(AuthActivity::class.java)
-                                appCompositionRoot.mActivity.finish()
-                            }
+        }
+    }
+
+    override fun syncTheme(appTheme: AppTheme) {
+        super.syncTheme(appTheme)
+        val appTheme1 = appTheme as com.example.housemanagment.uiTheme.AppTheme
+        binding.cardLogout.setOnClickListener {
+            appCompositionRoot.otherDialog(ZERO,appTheme1){
+                if (it){
+                    authViewModel.logOut()
+                    launch {
+                        authViewModel.logOut.fetchResult(appCompositionRoot.uiControllerApp){ logOutRes->
+                            appCompositionRoot.customToast(logOutRes?.message.toString())
+                            authViewModel.sharedPreferences.clear()
+                            launch { authViewModel.deleteUserTable() }
+                            appCompositionRoot.mActivity.startNewActivity(AuthActivity::class.java)
+                            appCompositionRoot.mActivity.finish()
                         }
                     }
                 }

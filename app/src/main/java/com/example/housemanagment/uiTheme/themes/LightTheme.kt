@@ -34,6 +34,14 @@ class LightTheme:AppTheme {
         return ContextCompat.getColor(context, R.color.hintColor)
     }
 
+    override fun itemCardColor(context: Context): Int {
+        return ContextCompat.getColor(context, R.color.white)
+    }
+
+    override fun iconColor(context: Context): Int {
+        return ContextCompat.getColor(context, R.color.black)
+    }
+
     override fun id(): Int {
         return 0
     }

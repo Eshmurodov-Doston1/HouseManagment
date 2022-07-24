@@ -32,8 +32,8 @@
         android:label="fragment_company"
         tools:layout="@layout/fragment_company" >
         <action
-            android:id="@+id/action_companyFragment_to_sectorFlatFragment"
-            app:destination="@id/sectorFlatFragment" />
+            android:id="@+id/action_companyFragment_to_housesFragment"
+            app:destination="@id/housesFragment" />
     </fragment>
     <fragment
         android:id="@+id/sectorFlatFragment"
@@ -49,4 +49,13 @@
         android:name="com.example.housemanagment.presentation.pages.flatData.FlatDataFragment"
         android:label="fragment_flat_data"
         tools:layout="@layout/fragment_flat_data" />
+    <fragment
+        android:id="@+id/housesFragment"
+        android:name="com.example.housemanagment.presentation.pages.house.HousesFragment"
+        android:label="fragment_houses"
+        tools:layout="@layout/fragment_houses" >
+        <action
+            android:id="@+id/action_housesFragment_to_sectorFlatFragment"
+            app:destination="@id/sectorFlatFragment" />
+    </fragment>
 </navigation>

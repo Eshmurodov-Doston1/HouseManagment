@@ -34,6 +34,14 @@ class DarkTheme:AppTheme {
         return ContextCompat.getColor(context, R.color.hintDarkColor)
     }
 
+    override fun itemCardColor(context: Context): Int {
+        return ContextCompat.getColor(context, R.color.backgroundDarkColor_Tool)
+    }
+
+    override fun iconColor(context: Context): Int {
+        return ContextCompat.getColor(context, R.color.white)
+    }
+
     override fun id(): Int {
         return 1
     }

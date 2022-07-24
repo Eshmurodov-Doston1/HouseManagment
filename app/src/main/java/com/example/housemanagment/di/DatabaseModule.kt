@@ -3,6 +3,7 @@ package com.example.housemanagment.di
 import android.content.Context
 import androidx.room.Room
 import com.example.housemanagment.database.AppDatabase
+import com.example.housemanagment.database.buildingCompany.BuildingDao
 import com.example.housemanagment.database.dao.UserDao
 import com.example.housemanagment.utils.AppConstant.DATABASE_NAME
 import dagger.Module
@@ -28,4 +29,8 @@ class DatabaseModule {
     @Singleton
     @Provides
     fun providesAppDao(appDatabase: AppDatabase):UserDao = appDatabase.appDao()
+
+    @Singleton
+    @Provides
+    fun providesBuilding(appDatabase: AppDatabase):BuildingDao = appDatabase.buildingDao()
 }

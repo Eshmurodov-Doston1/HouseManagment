@@ -1,7 +1,9 @@
 package com.example.housemanagment.utils.baseRes
 
+import android.accounts.NetworkErrorException
 import android.util.Log
 import com.example.housemanagment.utils.responseState.ResponseState
+import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.conn.ConnectTimeoutException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -11,6 +13,7 @@ import org.json.JSONObject
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
+import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 interface ResponseFetcher {
@@ -23,7 +26,8 @@ interface ResponseFetcher {
          flow {
                 val flow = try {
                     coroutineScope {
-                        if (response.isSuccessful) ResponseState.Success(response.body())
+                        if (response.isSuccessful)
+                            ResponseState.Success(response.body())
                         else throw HttpException(response)
                     }
                 } catch (e: IOException) {
@@ -34,9 +38,15 @@ interface ResponseFetcher {
                     ResponseState.Error(e.hashCode(), e.message)
                 }catch (e:IllegalArgumentException){
                     ResponseState.Error(e.hashCode(), e.message)
+                }catch (e: ConnectTimeoutException){
+                    ResponseState.Error(e.hashCode(), e.message)
                 }catch (e:IllegalThreadStateException){
                     ResponseState.Error(e.hashCode(), e.message)
                 }catch (e:InstantiationException){
+                    ResponseState.Error(e.hashCode(), e.message)
+                }catch (e:SocketTimeoutException){
+                    ResponseState.Error(e.hashCode(), e.message)
+                }catch (e: NetworkErrorException){
                     ResponseState.Error(e.hashCode(), e.message)
                 }
                 emit(flow)

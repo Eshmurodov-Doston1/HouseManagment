@@ -49,13 +49,17 @@ class AppCompositionRoot(
     val uiControllerApp get() = uiController
     val mySharedPreferencesApp get() = mySharedPreferences
 
+
+    var listExcation = ArrayList<String>()
+
     fun errorDialog(
         title:String,
         code:Int,
         mySharedPreferences: MySharedPreferences?=null,
         onClick:(bool:Boolean)->Unit
     ){
-        dialogHelper.errorDialog(title,code,mySharedPreferences){
+        listExcation.add(title)
+        dialogHelper.errorDialog(listExcation,code,mySharedPreferences){
             onClick.invoke(true)
         }
     }
@@ -74,9 +78,10 @@ class AppCompositionRoot(
 
     fun otherDialog(
         position:Int,
+        appTheme: AppTheme,
         onClick:(isClick:Boolean)->Unit
     ){
-        dialogHelper.otherDialog(position,onClick)
+        dialogHelper.otherDialog(position,appTheme,onClick)
     }
 
 

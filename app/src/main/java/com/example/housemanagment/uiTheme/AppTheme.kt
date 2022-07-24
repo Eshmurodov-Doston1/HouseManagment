@@ -11,4 +11,6 @@ interface AppTheme:AppTheme {
     fun lineColor(context: Context):Int
     fun itemButtonColor(context: Context):Int
     fun hintColor(context: Context):Int
+    fun itemCardColor(context: Context):Int
+    fun iconColor(context: Context):Int
 }

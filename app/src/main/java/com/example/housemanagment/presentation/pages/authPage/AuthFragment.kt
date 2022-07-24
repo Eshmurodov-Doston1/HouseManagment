@@ -28,7 +28,6 @@ import kotlinx.coroutines.launch
 class AuthFragment : BasePage(R.layout.fragment_auth) {
     private var _binding: FragmentAuthBinding? = null
     private val binding get() = _binding!!
-    private val compositionRoot get() = (requireActivity() as AuthActivity).appCompositionRoot
     private val authViewModel: AuthViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,7 +36,6 @@ class AuthFragment : BasePage(R.layout.fragment_auth) {
     ): View? {
         _binding = FragmentAuthBinding.inflate(inflater, container, false)
         bindingView = binding
-        appCompositionRootBase = compositionRoot
         return _binding?.root
     }
 
@@ -76,20 +74,20 @@ class AuthFragment : BasePage(R.layout.fragment_auth) {
                 } else {
                     authViewModel.authData(AuthReq(login,password))
                     launch {
-                        authViewModel.authData.fetchResult(compositionRoot.uiControllerApp) { authResponse->
+                        authViewModel.authData.fetchResult(appCompositionRootAuth.uiControllerApp) { authResponse->
                             launch {
                                 authResponse?.user.apply {
                                     authViewModel.saveUserEntity(UserEntity(
                                         this?.created_at ?: "",
                                         this?.email ?: "",
-                                        this?.email_verified_at.toString()?:"", this?.id ?: 0,
-                                        this?.name.toString()?:"", this?.role_as.toString(), this?.updated_at.toString()?:""
+                                        this?.email_verified_at.toString(), this?.id ?: 0,
+                                        this?.name.toString(), this?.role_as.toString(), this?.updated_at.toString()
                                     ))
                                 }
                             }
                             authViewModel.sharedPreferences.token = authResponse?.token
-                            compositionRoot.mActivity.startNewActivity(MainActivity::class.java)
-                            compositionRoot.mActivity.finish()
+                            appCompositionRootAuth.mActivity.startNewActivity(MainActivity::class.java)
+                            appCompositionRootAuth.mActivity.finish()
                         }
                     }
                 }
@@ -99,7 +97,7 @@ class AuthFragment : BasePage(R.layout.fragment_auth) {
 
 
     fun errorDialog(str: String) {
-        compositionRoot.errorDialog(str, -1,authViewModel.sharedPreferences) {}
+        appCompositionRootAuth.errorDialog(str, -1,authViewModel.sharedPreferences) {}
     }
 
 }

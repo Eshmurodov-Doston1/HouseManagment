@@ -10,11 +10,15 @@ import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.example.housemanagment.R
 import com.example.housemanagment.databinding.*
+import com.example.housemanagment.models.blockData.Block
+import com.example.housemanagment.models.buildingData.Building
 import com.example.housemanagment.models.demoMenu.DemoItem
 import com.example.housemanagment.models.demoMenu.DemoMenu
 import com.example.housemanagment.models.demoMenu.cash.CashItem
 import com.example.housemanagment.models.demoMenu.employe.Employee
 import com.example.housemanagment.models.demoMenu.place.PlaceData
+import com.example.housemanagment.models.flat.Flat
+import com.example.housemanagment.uiTheme.AppTheme
 import com.example.housemanagment.utils.AppConstant.ONE
 import com.example.housemanagment.utils.AppConstant.TWO
 import com.example.housemanagment.utils.AppConstant.ZERO
@@ -26,6 +30,7 @@ class RvGenericAdapter<T:Any>(
    @LayoutRes private val layoutRes: Int,
     var currentList:ArrayList<T>,
     private val context:Context,
+    private val appTheme: AppTheme?=null,
     private val onClick:(T:Any)->Unit
 ):RecyclerView.Adapter<GenericViewHolder<T>>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenericViewHolder<T> {
@@ -34,7 +39,7 @@ class RvGenericAdapter<T:Any>(
     }
 
     override fun onBindViewHolder(holder: GenericViewHolder<T>, position: Int) {
-        holder.onBind(currentList[position],position,layoutRes,onItemClickListener,context,onClick)
+        holder.onBind(currentList[position],position,layoutRes,onItemClickListener,context,appTheme,onClick)
     }
 
     override fun getItemCount(): Int {
@@ -48,16 +53,49 @@ class RvGenericAdapter<T:Any>(
         currentList = list
         notifyDataSetChanged()
     }
+
+
 }
 
 open class GenericViewHolder<T>(itemView:View):RecyclerView.ViewHolder(itemView),Holder<T>{
-    override fun onBind(data: T, position: Int, layoutRes: Int,
-                        onItemClickListener: RvGenericAdapter.OnItemClickListener<T>,
-                        context: Context,onClick: (T:Any) -> Unit) {
+    fun loadAnimation(context: Context):Animation{
+      return AnimationUtils.loadAnimation(context,R.anim.anim_rv)
+    }
+
+    override fun onBind(
+        data: T,
+        position: Int,
+        layoutRes: Int,
+        onItemClickListener: RvGenericAdapter.OnItemClickListener<T>,
+        context: Context,
+        appTheme: AppTheme?,
+        onClick: (T: Any) -> Unit
+    ) {
         when(layoutRes){
+
+            R.layout.item_house->{
+                itemView.animation = loadAnimation(context)
+                var itemPlaceBinding = ItemPlaceBinding.bind(itemView)
+                val placeData = data as Flat
+                itemPlaceBinding.name.textApp(placeData.name)
+                itemPlaceBinding.quantity.textApp("${context.getString(R.string.quantity)} ${placeData.home_count}")
+                itemPlaceBinding.summ.textApp("${context.getString(R.string.pay)} ${placeData.summa.toDouble().format()}")
+                itemPlaceBinding.card.setOnClickListener {
+                    onItemClickListener.onItemClick(data,position,layoutRes)
+                }
+                itemPlaceBinding.textBlock.textApp("Наши дома")
+
+                if (appTheme!=null){
+                    itemPlaceBinding.name.setTextColor(appTheme.textColorApp(context))
+                    itemPlaceBinding.quantity.setTextColor(appTheme.textColorApp(context))
+                    itemPlaceBinding.summ.setTextColor(appTheme.textColorApp(context))
+                    itemPlaceBinding.card.setCardBackgroundColor(appTheme.itemCardColor(context))
+                }
+            }
+
             R.layout.item_home_menu->{
                 itemView.animation = loadAnimation(context)
-               var itemHomeMenuBinding = ItemHomeMenuBinding.bind(itemView)
+                var itemHomeMenuBinding = ItemHomeMenuBinding.bind(itemView)
                 val demoMenu = data as DemoMenu
                 itemHomeMenuBinding.icon.setImageResource(demoMenu.icon)
                 itemHomeMenuBinding.createTv.textApp(demoMenu.title)
@@ -99,19 +137,51 @@ open class GenericViewHolder<T>(itemView:View):RecyclerView.ViewHolder(itemView)
                         cashItemBinding.imgCard.setBackgroundResource(R.drawable.card_and_cash)
                     }
                 }
+                if (appTheme!=null){
+                    cashItemBinding.cardCash.setCardBackgroundColor(appTheme.itemCardColor(context))
+                    cashItemBinding.textData.setTextColor(appTheme.textColorApp(context))
+                    cashItemBinding.summ.setTextColor(appTheme.textColorApp(context))
+                    cashItemBinding.fullName.setTextColor(appTheme.textColorApp(context))
+                }
             }
 
             R.layout.item_place->{
                 itemView.animation = loadAnimation(context)
-               var itemPlaceBinding = ItemPlaceBinding.bind(itemView)
-                val placeData = data as PlaceData
+                var itemPlaceBinding = ItemPlaceBinding.bind(itemView)
+                val placeData = data as Building
                 itemPlaceBinding.name.textApp(placeData.name)
-                itemPlaceBinding.quantity.textApp("${context.getString(R.string.quantity)} ${placeData.quantity}")
-                itemPlaceBinding.summ.textApp("${context.getString(R.string.pay)} ${placeData.pay_summ.format()}")
+                itemPlaceBinding.quantity.textApp("${context.getString(R.string.quantity)} ${placeData.blok_count}")
+                itemPlaceBinding.summ.textApp("${context.getString(R.string.pay)} ${placeData.summa.toDouble().format()}")
                 itemPlaceBinding.card.setOnClickListener {
                     onItemClickListener.onItemClick(data,position,layoutRes)
                 }
                 itemPlaceBinding.textBlock.textApp("Наши дома")
+
+                if (appTheme!=null){
+                    itemPlaceBinding.name.setTextColor(appTheme.textColorApp(context))
+                    itemPlaceBinding.quantity.setTextColor(appTheme.textColorApp(context))
+                    itemPlaceBinding.summ.setTextColor(appTheme.textColorApp(context))
+                    itemPlaceBinding.card.setCardBackgroundColor(appTheme.itemCardColor(context))
+                }
+            }
+            R.layout.item_place_company->{
+                itemView.animation = loadAnimation(context)
+                var itemPlaceBinding = ItemPlaceBinding.bind(itemView)
+                val placeData = data as Block
+                itemPlaceBinding.name.textApp(placeData.name)
+                itemPlaceBinding.quantity.textApp("${context.getString(R.string.quantity)} ${placeData.dom_count}")
+                itemPlaceBinding.summ.textApp("${context.getString(R.string.pay)} ${placeData.summa.toDouble().format()}")
+                itemPlaceBinding.card.setOnClickListener {
+                    onItemClickListener.onItemClick(data,position,layoutRes)
+                }
+                itemPlaceBinding.textBlock.textApp("Наши дома")
+
+                if (appTheme!=null){
+                    itemPlaceBinding.name.setTextColor(appTheme.textColorApp(context))
+                    itemPlaceBinding.quantity.setTextColor(appTheme.textColorApp(context))
+                    itemPlaceBinding.summ.setTextColor(appTheme.textColorApp(context))
+                    itemPlaceBinding.card.setCardBackgroundColor(appTheme.itemCardColor(context))
+                }
             }
 
             R.layout.employe_item->{
@@ -124,12 +194,16 @@ open class GenericViewHolder<T>(itemView:View):RecyclerView.ViewHolder(itemView)
                 employeeItemBinding.call.setOnClickListener {
                     onClick.invoke(data)
                 }
+                if (appTheme!=null){
+                    employeeItemBinding.apply {
+                        card.setCardBackgroundColor(appTheme.itemCardColor(itemView.context))
+                        name.setTextColor(appTheme.textColorApp(itemView.context))
+                        role.setTextColor(appTheme.textColorApp(itemView.context))
+                        lastEntrance.setTextColor(appTheme.textColorApp(itemView.context))
+                    }
+                }
             }
         }
-    }
-
-    fun loadAnimation(context: Context):Animation{
-      return AnimationUtils.loadAnimation(context,R.anim.anim_rv)
     }
 
 }

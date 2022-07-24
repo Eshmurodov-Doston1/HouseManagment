@@ -56,7 +56,7 @@
     <color name="textDarkColor">#FFFFFF</color>
     <color name="buttonDarkColor">#2757FF</color>
     <color name="emptyTextButtonDarkColor">#4F4F4F</color>
-    <color name="hintDarkColor">#FFFFFF</color>
+    <color name="hintDarkColor">#B9FFFFFF</color>
     <color name="line_color_dark">#777777</color>
     <!--DarkTheme-->
     <array name="BrushingChartColor">

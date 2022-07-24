@@ -1,17 +1,17 @@
 package com.example.housemanagment.network.rePository
 
-import com.example.housemanagment.network.auth.AuthService
+import com.example.housemanagment.network.auth.ApiService
 import com.example.housemanagment.utils.baseRes.ResponseFetcher
 import com.example.housemanagment.utils.responseState.ResponseState
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class AuthRepository @Inject constructor(
-    private val authService: AuthService,
+class ApiRepository @Inject constructor(
+    private val authService: ApiService,
     private val responseFetcher: ResponseFetcher.Base,
 ) {
 
-    suspend fun <T:Any,K> methodePOST(fullUrl:String,data: T,headerMap: HashMap<String,String>):Flow<ResponseState<K?>>{
+    suspend fun <T : Any,K> methodePOST(fullUrl:String, data: T, headerMap: HashMap<String,String>):Flow<ResponseState<K?>>{
         return responseFetcher.getFlowResponseState(authService.methodePOST(fullUrl,data,headerMap))
     }
 

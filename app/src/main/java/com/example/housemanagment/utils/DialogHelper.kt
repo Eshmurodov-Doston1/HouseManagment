@@ -38,7 +38,7 @@ class DialogHelper(
     private lateinit var chatAdapter: ChatAdapter
 
     fun errorDialog(
-        title:String,
+        listException: List<String>,
         code:Int,
         mySharedPreferences: MySharedPreferences?,
         click:(click:Boolean)->Unit
@@ -56,7 +56,11 @@ class DialogHelper(
         create.setView(errorDialog.root)
         when(code){
             -1->{
-                errorDialog.title.text = title
+                var errorMessage = ""
+                listException.onEach {
+                    errorMessage+="$it\n"
+                }
+                errorDialog.title.text = errorMessage
                 errorDialog.okBtn.gone()
                 errorDialog.closeBtn.setPadding(ZERO,ZERO,ZERO,ZERO)
                 errorDialog.closeBtn.text = context.getString(R.string.again)
@@ -78,7 +82,11 @@ class DialogHelper(
             }
             in CLIENT_CODE_START..CLIENT_CODE_END->{
                if (code!= UN_AUTHORIZATION){
-                   errorDialog.title.textApp(title)
+                   var errorMessage = ""
+                   listException.onEach {
+                       errorMessage+="$it\n"
+                   }
+                   errorDialog.title.textApp(errorMessage)
                    errorDialog.okBtn.gone()
                    errorDialog.closeBtn.setPadding(ZERO,ZERO,ZERO,ZERO)
                    errorDialog.closeBtn.text = context.getString(R.string.again)
@@ -136,11 +144,15 @@ class DialogHelper(
 
     fun otherDialog(
         position:Int,
+        appTheme: AppTheme,
         onCLick: (isClicked:Boolean) -> Unit
     ){
         var alertDialog = AlertDialog.Builder(context,R.style.BottomSheetDialogThem)
         val create = alertDialog.create()
         val dialogOtherBinding = DialogOtherBinding.inflate(inflater)
+        dialogOtherBinding.textOther.setTextColor(appTheme.textColorApp(context))
+        val gradientDrawable = dialogOtherBinding.consDialog.background as GradientDrawable
+        gradientDrawable.setColor(appTheme.backgroundColorApp(context))
         create.setView(dialogOtherBinding.root)
         dialogOtherBinding.apply {
             cancelButton.setOnClickListener {

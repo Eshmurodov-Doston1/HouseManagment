@@ -29,6 +29,11 @@
     <string name="pay">Сумма :</string>
     <string name="our_block">Наши блоки</string>
     <string name="number">№</string>
+    <string name="rums_count">Количество комнат:</string>
+    <string name="floor">Пол:</string>
+    <string name="sold_out">Распроданный</string>
+    <string name="not_sold">Не продано</string>
+    <string name="status">Статус:</string>
 
 
     <string name="operator">Оператор:</string>

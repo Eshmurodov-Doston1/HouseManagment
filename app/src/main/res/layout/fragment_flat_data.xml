@@ -40,7 +40,7 @@
                 <ImageView
                     android:id="@+id/image_flat"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/image"
+                    android:src="@drawable/place_holder"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -78,6 +78,7 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
+                            android:id="@+id/back_icon"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:alpha="0.6"
@@ -145,10 +146,9 @@
                         app:row_vertical_padding="@dimen/_10sdp"
                         app:header_text_size="@dimen/_10sdp"
                         app:row_text_size="@dimen/_12sdp"
-                        app:row_text_color="@color/textColor"
-                        app:header_text_color="@color/textColor"
-                        app:row_background_color="@color/backgroundColor"
-                        app:header_background_color="@color/backgroundColor"
+
+                        app:row_background_color="@android:color/transparent"
+                        app:header_background_color="@android:color/transparent"
                         app:persian_number="false"
                         app:corner_radius="8dp"
                         app:direction="ltr"
@@ -165,6 +165,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
                             <TextView
+                                android:id="@+id/all_sum"
                                 android:textColor="@color/hintColor"
                                 android:textStyle="normal"
                                 android:textSize="@dimen/_9sdp"
@@ -174,6 +175,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
                             <TextView
+                                android:id="@+id/all_flat"
                                 android:textColor="@color/hintColor"
                                 android:textStyle="normal"
                                 android:textSize="@dimen/_9sdp"
@@ -183,6 +185,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
                             <TextView
+                                android:id="@+id/all_debt"
                                 android:textColor="@color/hintColor"
                                 android:textStyle="normal"
                                 android:textSize="@dimen/_9sdp"

@@ -4,10 +4,13 @@ import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import com.example.housemanagment.R
+import com.example.housemanagment.models.blockData.Block
+import com.example.housemanagment.models.buildingData.Building
 import com.example.housemanagment.models.demoMenu.DemoItem
 import com.example.housemanagment.models.demoMenu.DemoMenu
 import com.example.housemanagment.models.demoMenu.flat.Flat
 import com.example.housemanagment.models.demoMenu.place.PlaceData
+import com.example.housemanagment.models.house.House
 
 class ScreenNavigator(
     private val navController: NavController
@@ -21,12 +24,18 @@ class ScreenNavigator(
         navController.navigate(R.id.action_mainFragment_to_documentFragment,bundle,animationCreatePage())
     }
     
-    fun createCompany(placeData: PlaceData){
+    fun createCompany(building: Building){
         var bundle = Bundle()
-        bundle.putSerializable("placeData",placeData)
+        bundle.putSerializable("building",building)
         navController.navigate(R.id.action_mainFragment_to_companyFragment,bundle,animationCreatePage())
     }
 
+
+    fun createSectorFlat(flat: com.example.housemanagment.models.flat.Flat){
+        var bundle = Bundle()
+        bundle.putSerializable("flat",flat)
+        navController.navigate(R.id.action_housesFragment_to_sectorFlatFragment,bundle,animationCreatePage())
+    }
 
     fun createCompanyWithDocument(placeData: PlaceData){
         var bundle = Bundle()
@@ -35,15 +44,15 @@ class ScreenNavigator(
     }
 
 
-    fun createFlatScreen(placeData: PlaceData){
+    fun createFlatScreen(block: Block){
         var bundle = Bundle()
-        bundle.putSerializable("placeData",placeData)
-        navController.navigate(R.id.action_companyFragment_to_sectorFlatFragment,bundle,animationCreatePage())
+        bundle.putSerializable("block",block)
+        navController.navigate(R.id.action_companyFragment_to_housesFragment,bundle,animationCreatePage())
     }
 
-    fun createFragmentFlatData(flat: Flat){
+    fun createFragmentFlatData(house: House){
         var bundle = Bundle()
-        bundle.putSerializable("flat",flat)
+        bundle.putSerializable("house",house)
         navController.navigate(R.id.action_sectorFlatFragment_to_flatDataFragment,bundle,animationCreatePage())
     }
 

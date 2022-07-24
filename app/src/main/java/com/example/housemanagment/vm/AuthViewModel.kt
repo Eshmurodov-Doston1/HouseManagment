@@ -1,6 +1,5 @@
 package com.example.housemanagment.vm
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.housemanagment.BuildConfig.BASE_URL
@@ -9,15 +8,13 @@ import com.example.housemanagment.database.repository.AuthDaoRepository
 import com.example.housemanagment.models.auth.AuthResponse
 import com.example.housemanagment.models.auth.auhtReq.AuthReq
 import com.example.housemanagment.models.logout.LogOutRes
-import com.example.housemanagment.network.rePository.AuthRepository
-import com.example.housemanagment.utils.AppConstant.ACCEPT
+import com.example.housemanagment.network.rePository.ApiRepository
 import com.example.housemanagment.utils.AppConstant.API
 import com.example.housemanagment.utils.AppConstant.ERROR_NO_INTERNET
 import com.example.housemanagment.utils.AppConstant.JSON_APP
 import com.example.housemanagment.utils.AppConstant.LOGIN
 import com.example.housemanagment.utils.AppConstant.LOGOUT
 import com.example.housemanagment.utils.AppConstant.TOKEN_TYPE
-import com.example.housemanagment.utils.AppConstant.TYPE_HTTP
 import com.example.housemanagment.utils.networkHelper.NetworkHelper
 import com.example.housemanagment.utils.responseState.ResponseState
 import com.example.housemanagment.utils.sharedPreference.MySharedPreferences
@@ -25,13 +22,12 @@ import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.HttpHead
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val networkHelper: NetworkHelper,
-    private val authRepository: AuthRepository,
+    private val authRepository: ApiRepository,
     private val mySharedPreferences: MySharedPreferences,
     private val authDaoRepository: AuthDaoRepository
 ):ViewModel(){

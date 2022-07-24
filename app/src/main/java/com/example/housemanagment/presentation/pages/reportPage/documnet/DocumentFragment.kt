@@ -7,12 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
+import com.dolatkia.animatedThemeManager.AppTheme
 import com.example.housemanagment.R
 import com.example.housemanagment.adapters.rvAdapter.RvGenericAdapter
 import com.example.housemanagment.databinding.FragmentDocumentBinding
 import com.example.housemanagment.models.demoMenu.DemoMenu
 import com.example.housemanagment.models.demoMenu.place.PlaceData
-import com.example.housemanagment.presentation.activitys.MainActivity
 import com.example.housemanagment.presentation.pages.base.BasePage
 import com.example.housemanagment.utils.AppConstant.ONE
 import com.example.housemanagment.utils.AppConstant.THREE
@@ -29,9 +29,7 @@ import kotlin.collections.ArrayList
 
 private const val ARG_PARAM1 = "demoMenu"
 class DocumentFragment : BasePage(R.layout.fragment_document) {
-
     private var demoMenu: DemoMenu? = null
-    private val compositionRoot get() = (activity as MainActivity).appCompositionRoot
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -49,19 +47,21 @@ class DocumentFragment : BasePage(R.layout.fragment_document) {
     ): View {
        _binding = FragmentDocumentBinding.inflate(inflater,container,false)
         //setupBarChart()
+        bindingView = binding
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun syncTheme(appTheme: AppTheme) {
+        super.syncTheme(appTheme)
+        val appTheme1 = appTheme as com.example.housemanagment.uiTheme.AppTheme
         binding.apply {
             when(demoMenu?.cateGory){
                 in ZERO..ONE->{
                     rvGenericAdapter = RvGenericAdapter(object:RvGenericAdapter.OnItemClickListener<PlaceData>{
                         override fun onItemClick(demoMenu: PlaceData, position: Int, layoutRes: Int) {
-                            compositionRoot.screenNavigator.createCompanyWithDocument(demoMenu)
+                            appCompositionRoot.screenNavigator.createCompanyWithDocument(demoMenu)
                         }
-                    },R.layout.item_place,getPlaceData(),compositionRoot.mContext){t->}
+                    },R.layout.item_place,getPlaceData(),appCompositionRoot.mContext,appTheme1){t->}
                     rv.adapter = rvGenericAdapter
                     searChAllHome()
                 }
@@ -72,7 +72,13 @@ class DocumentFragment : BasePage(R.layout.fragment_document) {
 
                 }
             }
+        }
+    }
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply {
 
             include.shimmer.startShimmer()
             Handler(Looper.getMainLooper()).postDelayed({
@@ -85,7 +91,7 @@ class DocumentFragment : BasePage(R.layout.fragment_document) {
 
 
             back.setOnClickListener {
-                compositionRoot.screenNavigator.popBackStack()
+                appCompositionRoot.screenNavigator.popBackStack()
             }
             toolbarText.textApp(demoMenu?.title.toString())
             searchButton.setOnClickListener {
@@ -93,7 +99,7 @@ class DocumentFragment : BasePage(R.layout.fragment_document) {
                 searchButton.gone()
                 back.gone()
                 searchLinear.visible()
-              compositionRoot.inputTextCreateKeyboard(search)
+              appCompositionRoot.inputTextCreateKeyboard(search)
             }
             clearText.setOnClickListener {
                 if (search.text.toString().isNotNullOrEmpty()){
@@ -103,7 +109,7 @@ class DocumentFragment : BasePage(R.layout.fragment_document) {
                     searchButton.visible()
                     back.visible()
                     searchLinear.gone()
-                    compositionRoot.hideKeyboard(search)
+                    appCompositionRoot.hideKeyboard(search)
                 }
             }
 

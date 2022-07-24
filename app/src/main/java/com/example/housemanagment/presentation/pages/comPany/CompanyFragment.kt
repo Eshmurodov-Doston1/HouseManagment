@@ -1,42 +1,43 @@
 package com.example.housemanagment.presentation.pages.comPany
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.viewModels
+import com.dolatkia.animatedThemeManager.AppTheme
 import com.example.housemanagment.R
 import com.example.housemanagment.adapters.rvAdapter.RvGenericAdapter
 import com.example.housemanagment.databinding.FragmentCompanyBinding
-import com.example.housemanagment.models.demoMenu.place.PlaceData
-import com.example.housemanagment.presentation.activitys.MainActivity
+import com.example.housemanagment.models.blockData.Block
+import com.example.housemanagment.models.buildingData.Building
 import com.example.housemanagment.presentation.pages.base.BasePage
-import com.example.housemanagment.utils.extension.gone
-import com.example.housemanagment.utils.extension.isNotNullOrEmpty
-import com.example.housemanagment.utils.extension.textApp
-import com.example.housemanagment.utils.extension.visible
-private const val ARG_PARAM1 = "placeData"
+import com.example.housemanagment.utils.extension.*
+import com.example.housemanagment.vm.buildings.BuildingViewModel
+import kotlinx.coroutines.launch
+
+private const val ARG_PARAM1 = "building"
 
 class CompanyFragment : BasePage(R.layout.fragment_company) {
-    private var placeData: PlaceData? = null
-
+    private var building: Building? = null
+    private val buildingViewModel:BuildingViewModel by viewModels()
+    private lateinit var listData:ArrayList<Block>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            placeData = it.getSerializable(ARG_PARAM1) as PlaceData
+            building = it.getSerializable(ARG_PARAM1) as Building
         }
     }
     private var _binding:FragmentCompanyBinding?=null
     private val binding get() = _binding!!
-    private lateinit var genericAdapterPlace: RvGenericAdapter<PlaceData>
-    private val appCompositionRoot get() = (activity as MainActivity).appCompositionRoot
+    private lateinit var genericAdapterPlace: RvGenericAdapter<Block>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCompanyBinding.inflate(inflater,container,false)
+        bindingView = binding
         return binding.root
     }
 
@@ -45,13 +46,6 @@ class CompanyFragment : BasePage(R.layout.fragment_company) {
         binding.apply {
 
             include.shimmer.startShimmer()
-            Handler(Looper.getMainLooper()).postDelayed({
-                include.shimmer.stopShimmer()
-                consTool.visible()
-                rvHouse.visible()
-                include.consSimmer.gone()
-            },2000)
-
 
 
             searchButton.setOnClickListener {
@@ -72,23 +66,20 @@ class CompanyFragment : BasePage(R.layout.fragment_company) {
                 }
             }
 
+            textToolbar.textApp(building?.name.toString())
 
-
-
-
-            textToolbar.textApp(placeData?.name.toString())
-            genericAdapterPlace = RvGenericAdapter(object:RvGenericAdapter.OnItemClickListener<PlaceData>{
-                override fun onItemClick(demoMenu: PlaceData, position: Int, layoutRes: Int) {
-                   appCompositionRoot.screenNavigator.createFlatScreen(demoMenu)
-                }
-            },R.layout.item_place,getCompany(),appCompositionRoot.mContext){t->}
-            rvHouse.adapter = genericAdapterPlace
             back.setOnClickListener {
                 appCompositionRoot.screenNavigator.popBackStack()
             }
             searchCompany()
         }
 
+    }
+
+    override fun syncTheme(appTheme: AppTheme) {
+        super.syncTheme(appTheme)
+        val appTheme1 = appTheme as com.example.housemanagment.uiTheme.AppTheme
+        getData(appTheme1,false)
     }
 
     private fun searchCompany() {
@@ -100,18 +91,43 @@ class CompanyFragment : BasePage(R.layout.fragment_company) {
     }
 
     private fun filterEmploye(text: String) {
-        var listPlaceData = ArrayList<PlaceData>()
+        var listPlaceData = ArrayList<Block>()
         if (text.isNotNullOrEmpty()){
-            getCompany().onEach { employee ->
-                if (employee.name.lowercase().contains(text.lowercase())){
-                    listPlaceData.add(employee)
+            listData.onEach { block ->
+                if (block.name.lowercase().contains(text.lowercase())){
+                    listPlaceData.add(block)
                 }
             }
         }
         if (text.isNotNullOrEmpty()){
             genericAdapterPlace.filterData(listPlaceData)
         }else{
-            genericAdapterPlace.filterData(getCompany())
+            genericAdapterPlace.filterData(listData)
+        }
+    }
+
+
+    fun getData(appTheme: com.example.housemanagment.uiTheme.AppTheme,isRefresh:Boolean){
+        listData = ArrayList()
+        launch {
+            buildingViewModel.getDataBuildingBlock(building?.id?:0)
+            buildingViewModel.blockData.fetchResult(appCompositionRoot.uiControllerApp){ result->
+                listData = result?.success?.list as ArrayList<Block>
+                if(listData.isEmpty()) binding.includeApp.lottie.visible()
+                genericAdapterPlace = RvGenericAdapter(object:RvGenericAdapter.OnItemClickListener<Block>{
+                    override fun onItemClick(block: Block, position: Int, layoutRes: Int) {
+                        appCompositionRoot.screenNavigator.createFlatScreen(block)
+                    }
+                },R.layout.item_place_company,listData,appCompositionRoot.mContext,appTheme){ t->}
+                binding.rvHouse.adapter = genericAdapterPlace
+
+                binding.include.shimmer.stopShimmer()
+                binding.consTool.visible()
+                binding.rvHouse.visible()
+                binding.include.consSimmer.gone()
+
+
+            }
         }
     }
 

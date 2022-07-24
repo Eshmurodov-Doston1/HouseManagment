@@ -157,7 +157,7 @@ fun BottomNavigationView.clickData(itemId:Int):Int{
 }
 
 fun View.loadAnimation(context: Context):Animation{
-    val loadAnimation = AnimationUtils.loadAnimation(context, R.anim.anim_view)
+    val loadAnimation = AnimationUtils.loadAnimation(context, R.anim.anim_rv)
     this.animation = loadAnimation
     return loadAnimation
 }
