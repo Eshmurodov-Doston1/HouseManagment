@@ -87,21 +87,6 @@ class ReportFragment : BasePage(R.layout.fragment_report) {
                     swipeRefresh.isRefreshing = false
                 }
             }
-            if (!isRefresh) {
-                viewCons.loadAnimation(appCompositionRoot.mContext).setAnimationListener(object : Animation.AnimationListener {
-                    override fun onAnimationStart(p0: Animation?) {
-
-                    }
-
-                    override fun onAnimationEnd(p0: Animation?) {
-
-                    }
-
-                    override fun onAnimationRepeat(p0: Animation?) {
-
-                    }
-                })
-            }
             viewCons.visible()
         }
     }

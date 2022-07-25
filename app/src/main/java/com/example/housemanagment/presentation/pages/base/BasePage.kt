@@ -71,7 +71,7 @@ open class BasePage(
             R.layout.fragment_sector_flat->{
                 val binding = bindingView as FragmentSectorFlatBinding
                 binding.apply {
-                    shimmerInclude.consSimmer.setBackgroundColor(appTheme1.backgroundColorApp(requireContext()))
+                    shimmerInclude.consShimmer.setBackgroundColor(appTheme1.backgroundColorApp(requireContext()))
                     consToolbar.setBackgroundColor(appTheme1.backgroundColorTool(requireContext()))
                     backIcon.setColorFilter(appTheme1.iconColor(requireContext()), PorterDuff.Mode.SRC_ATOP)
                     toolbarText.setTextColor(appTheme1.textColorApp(requireContext()))
@@ -160,28 +160,9 @@ open class BasePage(
 
     fun getDemoMenu():ArrayList<DemoMenu>{
         var listDemoMenu = ArrayList<DemoMenu>()
-        listDemoMenu.add(DemoMenu(context?.getString(R.string.all_home).toString(),"25 заказов",R.drawable.ic_home,ContextCompat.getColor(requireContext(),R.color.main_card_first_color),ZERO))
-        listDemoMenu.add(DemoMenu(context?.getString(R.string.sold_out_flat).toString(),"54 035 руб",R.drawable.ic_group_3,ContextCompat.getColor(requireContext(),R.color.main_card_second_color), ONE))
-        listDemoMenu.add(DemoMenu(context?.getString(R.string.get_summ).toString(),"345 000 руб",R.drawable.ic_three_con,ContextCompat.getColor(requireContext(),R.color.main_card_three_color), TWO))
-        listDemoMenu.add(DemoMenu(context?.getString(R.string.return_summ).toString(),"345 000 руб",R.drawable.ic_four,ContextCompat.getColor(requireContext(),R.color.main_card_four_color), THREE))
+        listDemoMenu.add(DemoMenu(context?.getString(R.string.all_home).toString(),R.drawable.ic_home,ContextCompat.getColor(requireContext(),R.color.main_card_first_color),ZERO))
+        listDemoMenu.add(DemoMenu(context?.getString(R.string.sold_out_flat).toString(),R.drawable.ic_group_3,ContextCompat.getColor(requireContext(),R.color.main_card_second_color), ONE))
         return listDemoMenu
-    }
-
-    fun getDataItem():ArrayList<DemoItem>{
-        var listDemoItem = ArrayList<DemoItem>()
-        listDemoItem.add(DemoItem("Caegory 1",121,312491658.0))
-        listDemoItem.add(DemoItem("Caegory 2",144,512123121.0))
-        listDemoItem.add(DemoItem("Caegory 3",33,41491194.0))
-        listDemoItem.add(DemoItem("Caegory 4 \uD83D\uDE02\uD83D\uDE02\uD83D\uDE02\uD83D\uDE02",140,312491658.0))
-        listDemoItem.add(DemoItem("Caegory 5",121,312491658.0))
-        listDemoItem.add(DemoItem("Caegory 6",144,512123121.0))
-        listDemoItem.add(DemoItem("Caegory 7",33,41491194.0))
-        listDemoItem.add(DemoItem("Caegory 8 \uD83D\uDE02\uD83D\uDE02\uD83D\uDE02\uD83D\uDE02",140,312491658.0))
-        listDemoItem.add(DemoItem("Caegory 9",121,312491658.0))
-        listDemoItem.add(DemoItem("Caegory 10",144,512123121.0))
-        listDemoItem.add(DemoItem("Caegory 11",33,41491194.0))
-        listDemoItem.add(DemoItem("Caegory 12 \uD83D\uDE02\uD83D\uDE02\uD83D\uDE02\uD83D\uDE02",140,312491658.0))
-        return listDemoItem
     }
 
 
@@ -202,30 +183,7 @@ open class BasePage(
         return listCash
     }
 
-    fun loadCash():ArrayList<CashDataChild>{
-        var listCashData = ArrayList<CashDataChild>()
-        var listCash = ArrayList<CashItemData>()
-        listCash.add(CashItemData(R.drawable.ic_cash_summ,context?.getString(R.string.cash).toString(),500000.0))
-        listCash.add(CashItemData(R.drawable.ic_card,context?.getString(R.string.card).toString(),250000.0))
-        listCashData.add(CashDataChild("Глобальные кассы",listCash))
-        listCash = ArrayList()
-        listCash.add(CashItemData(R.drawable.ic_cash_summ,context?.getString(R.string.cash).toString(),500000.0))
-        listCash.add(CashItemData(R.drawable.ic_card,context?.getString(R.string.card).toString(),250000.0))
-        listCash.add(CashItemData(R.drawable.ic_cash_summ,context?.getString(R.string.cash).toString(),500000.0))
-        listCash.add(CashItemData(R.drawable.ic_card,context?.getString(R.string.card).toString(),250000.0))
-        listCashData.add(CashDataChild("Оболонь",listCash))
-        listCash = ArrayList()
-        listCash.add(CashItemData(R.drawable.ic_cash_summ,context?.getString(R.string.cash).toString(),500000.0))
-        listCash.add(CashItemData(R.drawable.ic_card,context?.getString(R.string.card).toString(),250000.0))
-        listCashData.add(CashDataChild("Глобальные кассы",listCash))
-        listCash = ArrayList()
-        listCash.add(CashItemData(R.drawable.ic_cash_summ,context?.getString(R.string.cash).toString(),500000.0))
-        listCash.add(CashItemData(R.drawable.ic_card,context?.getString(R.string.card).toString(),250000.0))
-        listCash.add(CashItemData(R.drawable.ic_cash_summ,context?.getString(R.string.cash).toString(),500000.0))
-        listCash.add(CashItemData(R.drawable.ic_card,context?.getString(R.string.card).toString(),250000.0))
-        listCashData.add(CashDataChild("Оболонь",listCash))
-        return listCashData
-    }
+
 
 
     fun getPlaceData():ArrayList<PlaceData>{
@@ -249,86 +207,7 @@ open class BasePage(
         return listPlace
     }
 
-    fun getCompany():ArrayList<PlaceData>{
-        var listPlace = ArrayList<PlaceData>()
-        listPlace.add(PlaceData("Block A",6,312491658.0))
-        listPlace.add(PlaceData("Block B",7,312491658.0))
-        listPlace.add(PlaceData("Block C",4,312491658.0))
-        listPlace.add(PlaceData("Block D",3,312491658.0))
-        listPlace.add(PlaceData("Block E",7,312491658.0))
-        listPlace.add(PlaceData("Block G",7,312491658.0))
-        listPlace.add(PlaceData("Block F",9,312491658.0))
-        listPlace.add(PlaceData("Block R",2,312491658.0))
-        listPlace.add(PlaceData("Block A",6,312491658.0))
-        listPlace.add(PlaceData("Block B",7,312491658.0))
-        listPlace.add(PlaceData("Block C",4,312491658.0))
-        listPlace.add(PlaceData("Block D",3,312491658.0))
-        listPlace.add(PlaceData("Block E",7,312491658.0))
-        listPlace.add(PlaceData("Block G",7,312491658.0))
-        listPlace.add(PlaceData("Block F",9,312491658.0))
-        listPlace.add(PlaceData("Block R",2,312491658.0))
-        return listPlace
-    }
 
-
-
-    fun getAllflatData():ArrayList<FlatData>{
-        var flatData = ArrayList<FlatData>()
-        var flatList = ArrayList<Flat>()
-        flatList.add(Flat(1,"https://images.unsplash.com/photo-1579963824000-7d7b70b2f7a3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8ZmxhdHN8ZW58MHx8MHx8&w=1000&q=80","Dostonbek Eshmurodov","Африка ко’часи," +
-                "Подъезд 2, №1","В рассрочку","36 Месяцев","31 Месяц",123831591.0,3831591.0,312491658.0,431414951.0,0,62.0))
-        flatList.add(Flat(2,"https://image.shutterstock.com/image-photo/modern-apartment-buildings-richmond-british-260nw-501606547.jpg",null,"Африка ко’часи," +
-                "Подъезд 2, №2",null,null,null,null,null,null,431414951.0,1,43.0))
-        flatList.add(Flat(3,"https://image.shutterstock.com/image-photo/modern-apartment-buildings-richmond-british-260nw-501606547.jpg","Dostonbek Eshmurodov","Африка ко’часи," +
-                "Подъезд 2, №3","В рассрочку","36 Месяцев","31 Месяц",123831591.0,3831591.0,312491658.0,431414951.0,2,52.0))
-        flatData.add(FlatData("C1",flatList))
-        flatList = ArrayList()
-        flatList.add(Flat(1,"https://image.shutterstock.com/image-photo/modern-apartment-buildings-richmond-british-260nw-501606547.jpg","Dostonbek Eshmurodov","Африка ко’часи," +
-                "Подъезд 2, №1","В рассрочку","36 Месяцев","31 Месяц",123831591.0,3831591.0,312491658.0,431414951.0,0,32.0))
-        flatList.add(Flat(2,"https://image.shutterstock.com/image-photo/modern-apartment-buildings-richmond-british-260nw-501606547.jpg","Dostonbek Eshmurodov","Африка ко’часи," +
-                "Подъезд 2, №2",null,null,null,null,null,null,431414951.0,1,62.0))
-        flatList.add(Flat(3,"https://image.shutterstock.com/image-photo/modern-apartment-buildings-richmond-british-260nw-501606547.jpg","Dostonbek Eshmurodov","Африка ко’часи," +
-                "Подъезд 2, №3","В рассрочку","36 Месяцев","31 Месяц",123831591.0,3831591.0,312491658.0,431414951.0,2,32.0))
-        flatData.add(FlatData("C2",flatList))
-        flatList = ArrayList()
-        flatList.add(Flat(1,"https://image.shutterstock.com/image-photo/modern-apartment-buildings-richmond-british-260nw-501606547.jpg","Dostonbek Eshmurodov","Африка ко’часи," +
-                "Подъезд 2, №1","В рассрочку","36 Месяцев","31 Месяц",123831591.0,3831591.0,312491658.0,431414951.0,0,62.0))
-        flatList.add(Flat(2,"https://image.shutterstock.com/image-photo/modern-apartment-buildings-richmond-british-260nw-501606547.jpg","Dostonbek Eshmurodov","Африка ко’часи," +
-                "Подъезд 2, №2",null,null,null,null,null,null,431414951.0,1,62.0))
-        flatList.add(Flat(3,"https://image.shutterstock.com/image-photo/modern-apartment-buildings-richmond-british-260nw-501606547.jpg","Dostonbek Eshmurodov","Африка ко’часи," +
-                "Подъезд 2, №3","В рассрочку","36 Месяцев","31 Месяц",123831591.0,3831591.0,312491658.0,431414951.0,2,62.0))
-        flatData.add(FlatData("C3",flatList))
-        return flatData
-    }
-
-    fun getChatData():List<ChatData>{
-        var listChatData = ArrayList<ChatData>()
-        listChatData.add(ChatData("Salom yaxshimisiz",1))
-        listChatData.add(ChatData("Voaleykum assalom nima muammo?",0))
-        listChatData.add(ChatData("Tinch prosta applicationni ishlatish uchun yozvomman",1))
-        listChatData.add(ChatData("Ha yaxshi.",0))
-        listChatData.add(ChatData("Salom yaxshimisiz",1))
-        listChatData.add(ChatData("Voaleykum assalom nima muammo?",0))
-        listChatData.add(ChatData("Tinch prosta applicationni ishlatish uchun yozvomman",1))
-        listChatData.add(ChatData("Ha yaxshi.",0))
-        listChatData.add(ChatData("Salom yaxshimisiz",1))
-        listChatData.add(ChatData("Voaleykum assalom nima muammo?",0))
-        listChatData.add(ChatData("Tinch prosta applicationni ishlatish uchun yozvomman",1))
-        listChatData.add(ChatData("Ha yaxshi.",0))
-        listChatData.add(ChatData("Salom yaxshimisiz",1))
-        listChatData.add(ChatData("Voaleykum assalom nima muammo?",0))
-        listChatData.add(ChatData("Tinch prosta applicationni ishlatish uchun yozvomman",1))
-        listChatData.add(ChatData("Ha yaxshi.",0))
-        listChatData.add(ChatData("Salom yaxshimisiz",1))
-        listChatData.add(ChatData("Voaleykum assalom nima muammo?",0))
-        listChatData.add(ChatData("Tinch prosta applicationni ishlatish uchun yozvomman",1))
-        listChatData.add(ChatData("Ha yaxshi.",0))
-        listChatData.add(ChatData("Salom yaxshimisiz",1))
-        listChatData.add(ChatData("Voaleykum assalom nima muammo?",0))
-        listChatData.add(ChatData("Tinch prosta applicationni ishlatish uchun yozvomman",1))
-        listChatData.add(ChatData("Ha yaxshi.",0))
-        return  listChatData
-    }
 
     fun getEmployee():ArrayList<Employee>{
         var listEmployee = ArrayList<Employee>()

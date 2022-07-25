@@ -52,31 +52,7 @@ class FlatDataFragment : BasePage(R.layout.fragment_flat_data) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-
-            collapsing.setExpandedTitleTextAppearance(R.style.ExpandedAppBar)
-            collapsing.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar)
-
-            appbar.addOnOffsetChangedListener(object: InfoClass(){
-                override fun onStateChanged(appBarLayout: AppBarLayout?, state: State?) {
-                    when(state){
-                        State.COLLAPSED->{
-                            if (authViewModel.sharedPreferences.theme == true){
-                                toolbar.setBackgroundColor(requireActivity().getColor(R.color.backgroundDarkColor_Tool))
-                            }else{
-                                toolbar.setBackgroundColor(requireActivity().getColor(R.color.backgroundColor))
-                            }
-                        }
-                        State.EXPANDED->{
-                            toolbar.setBackgroundColor(Color.TRANSPARENT)
-                        }
-                        else -> {}
-                    }
-                }
-            })
-
-            //appCompositionRoot.setImage(imageFlat, house?.image.toString(),0F)
-
-            collapsing.title = "${appCompositionRoot.mActivity.getString(R.string.number)} ${house?.number.toString()}"
+            textToolbar.textApp("${appCompositionRoot.mActivity.getString(R.string.number)} ${house?.number.toString()}")
             back.setOnClickListener {
                 appCompositionRoot.screenNavigator.popBackStack()
             }
@@ -111,14 +87,10 @@ class FlatDataFragment : BasePage(R.layout.fragment_flat_data) {
                viewTableColor(R.color.textDarkColor,R.color.backgroundDarkColor)
                back.setCardBackgroundColor(requireActivity().getColor(R.color.backgroundDarkColor_Tool))
                backIcon.setColorFilter(requireActivity().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP)
-               collapsing.setCollapsedTitleTextColor(requireActivity().getColor(R.color.textDarkColor))
-               collapsing.setContentScrimColor(requireActivity().getColor(R.color.backgroundDarkColor_Tool))
            }else{
                viewTableColor(R.color.textColor,R.color.backgroundColor)
                back.setCardBackgroundColor(requireActivity().getColor(R.color.backgroundColor))
                backIcon.setColorFilter(requireActivity().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP)
-               collapsing.setCollapsedTitleTextColor(requireActivity().getColor(R.color.textColor))
-               collapsing.setContentScrimColor(requireActivity().getColor(R.color.backgroundColor))
            }
 
             dataTable.headerTextSize = 15F
@@ -152,7 +124,14 @@ class FlatDataFragment : BasePage(R.layout.fragment_flat_data) {
             homeSum.setTextColor(requireActivity().getColor(textColor))
             debtText.setTextColor(requireActivity().getColor(textColor))
             cardSum.setCardBackgroundColor(requireActivity().getColor(backGroundColor))
+            textToolbar.setTextColor(requireActivity().getColor(textColor))
         }
+    }
+
+    override fun syncTheme(appTheme: AppTheme) {
+        super.syncTheme(appTheme)
+        val appTheme1 = appTheme as com.example.housemanagment.uiTheme.AppTheme
+        binding.consTool.setBackgroundColor(appTheme1.backgroundColorTool(requireContext()))
     }
 
 }

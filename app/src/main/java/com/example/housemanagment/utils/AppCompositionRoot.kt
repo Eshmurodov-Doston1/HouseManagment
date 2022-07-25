@@ -1,5 +1,6 @@
 package com.example.housemanagment.utils
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -26,6 +27,7 @@ import com.example.housemanagment.utils.sharedPreference.MySharedPreferences
 import com.example.housemanagment.utils.uiController.UiController
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.permissionx.guolindev.PermissionX
 
 class AppCompositionRoot(
     private val activity:AppCompatActivity,
@@ -149,6 +151,25 @@ class AppCompositionRoot(
     fun colorStatusAndNavigationBars(color:Int){
         mActivity.window?.statusBarColor = color
         mActivity.window?.navigationBarColor = color
+    }
+
+
+
+    fun call(
+        phoneNumber: String
+    ){
+        PermissionX.init(activity)
+            .permissions(Manifest.permission.CALL_PHONE)
+            .onExplainRequestReason { scope, deniedList ->
+                scope.showRequestReasonDialog(deniedList, mContext.getString(R.string.permission_str), "OK", mContext.getString(R.string.cancel))
+            }
+            .request { allGranted, grantedList, deniedList ->
+                if (allGranted) {
+                    callAdmin(phoneNumber)
+                } else {
+                    createSettings()
+                }
+            }
     }
 
 }

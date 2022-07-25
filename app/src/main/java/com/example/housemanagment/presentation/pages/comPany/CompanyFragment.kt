@@ -125,8 +125,6 @@ class CompanyFragment : BasePage(R.layout.fragment_company) {
                 binding.consTool.visible()
                 binding.rvHouse.visible()
                 binding.include.consSimmer.gone()
-
-
             }
         }
     }

@@ -16,6 +16,7 @@ import com.example.housemanagment.databinding.FragmentSectorFlatBinding
 import com.example.housemanagment.models.flat.Flat
 import com.example.housemanagment.models.house.House
 import com.example.housemanagment.presentation.pages.base.BasePage
+import com.example.housemanagment.utils.AppConstant.ZERO
 import com.example.housemanagment.utils.extension.fetchResult
 import com.example.housemanagment.utils.extension.gone
 import com.example.housemanagment.utils.extension.textApp
@@ -57,7 +58,7 @@ class SectorFlatFragment : BasePage(R.layout.fragment_sector_flat) {
             shimmerInclude.shimmer.startShimmer()
             Handler(Looper.getMainLooper()).postDelayed({
                 shimmerInclude.shimmer.stopShimmer()
-                shimmerInclude.consSimmer.gone()
+                shimmerInclude.consShimmer.gone()
                 consToolbar.visible()
                 rvFlat.visible()
             },2000)
@@ -86,21 +87,10 @@ class SectorFlatFragment : BasePage(R.layout.fragment_sector_flat) {
                if (result?.success?.list?.isEmpty() == true) binding.includeApp.lottie.visible()
                 childAdapterFlat = ChildAdapterFlat(result?.success?.list as ArrayList<House>,object:ChildAdapterFlat.OnItemClickListener{
                     override fun onItemClick(house: House, position: Int) {
-                        appCompositionRoot.screenNavigator.createFragmentFlatData(house)
+                        appCompositionRoot.screenNavigator.createFragmentFlatData(house,ZERO)
                     }
                     override fun onItemClickCall(house: House, position: Int) {
-                        PermissionX.init(activity)
-                            .permissions(Manifest.permission.CALL_PHONE)
-                            .onExplainRequestReason { scope, deniedList ->
-                                scope.showRequestReasonDialog(deniedList, appCompositionRoot.mContext.getString(R.string.permission_str), "OK", appCompositionRoot.mContext.getString(R.string.cancel))
-                            }
-                            .request { allGranted, grantedList, deniedList ->
-                                if (allGranted) {
-                                    appCompositionRoot.callAdmin("+998901277233")
-                                } else {
-                                    appCompositionRoot.createSettings()
-                                }
-                            }
+                     appCompositionRoot.call("+998901277233")
                     }
                     override fun onItemClickCallSMS(house: House, position: Int) {
 //                        appCompositionRoot.createChatDialog(house.toString(),getChatData()) {

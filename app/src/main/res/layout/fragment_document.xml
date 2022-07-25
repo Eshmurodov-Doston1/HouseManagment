@@ -11,6 +11,12 @@
         layout="@layout/shimmer_doc"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+    <include
+        android:id="@+id/include_shim"
+        android:visibility="visible"
+        layout="@layout/shimmer_sector_flat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cons_toolbar"
         android:visibility="gone"
@@ -126,5 +132,9 @@
         tools:listitem="@layout/item_place"
         android:layout_width="match_parent"
         android:layout_height="0dp"/>
-
+    <include
+        android:id="@+id/include_app"
+        layout="@layout/empty_lottie"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

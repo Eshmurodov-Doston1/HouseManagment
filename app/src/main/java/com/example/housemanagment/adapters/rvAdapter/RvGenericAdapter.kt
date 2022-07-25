@@ -49,6 +49,7 @@ class RvGenericAdapter<T:Any>(
     interface OnItemClickListener<T>{
         fun onItemClick(demoMenu: T, position: Int,@LayoutRes layoutRes: Int)
     }
+    
     fun filterData(list: ArrayList<T>){
         currentList = list
         notifyDataSetChanged()
@@ -99,7 +100,6 @@ open class GenericViewHolder<T>(itemView:View):RecyclerView.ViewHolder(itemView)
                 val demoMenu = data as DemoMenu
                 itemHomeMenuBinding.icon.setImageResource(demoMenu.icon)
                 itemHomeMenuBinding.createTv.textApp(demoMenu.title)
-                itemHomeMenuBinding.usersTv.textApp(demoMenu.users)
                 itemHomeMenuBinding.card.setCardBackgroundColor(demoMenu.colorCard)
                 itemHomeMenuBinding.card.setOnClickListener {
                     onItemClickListener.onItemClick(data,position,layoutRes)
@@ -146,7 +146,6 @@ open class GenericViewHolder<T>(itemView:View):RecyclerView.ViewHolder(itemView)
             }
 
             R.layout.item_place->{
-                itemView.animation = loadAnimation(context)
                 var itemPlaceBinding = ItemPlaceBinding.bind(itemView)
                 val placeData = data as Building
                 itemPlaceBinding.name.textApp(placeData.name)

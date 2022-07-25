@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/cons_simmer"
+    android:id="@+id/cons_shimmer"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer"
@@ -61,14 +61,6 @@
                                android:layout_height="match_parent"
                                android:orientation="horizontal">
 
-                               <androidx.cardview.widget.CardView
-                                   android:layout_width="@dimen/_80sdp"
-                                   android:layout_height="match_parent"
-                                   android:layout_marginLeft="@dimen/_7sdp"
-                                   app:cardBackgroundColor="@color/shimmer_item_color"
-                                   app:cardCornerRadius="@dimen/_3sdp"
-                                   app:cardElevation="0dp" />
-
                                <androidx.appcompat.widget.LinearLayoutCompat
 
                                    android:layout_width="match_parent"
@@ -170,23 +162,6 @@
                                        app:cardBackgroundColor="@color/shimmer_item_color"
                                        app:cardCornerRadius="@dimen/_4sdp"
                                        app:cardElevation="0dp" />
-                                   <androidx.cardview.widget.CardView
-                                       android:layout_width="match_parent"
-                                       android:layout_marginTop="@dimen/_5sdp"
-                                       android:layout_height="@dimen/_15sdp"
-                                       android:layout_marginHorizontal="@dimen/_5sdp"
-                                       android:layout_weight="1"
-                                       android:background="@drawable/shimmer_text_bac"
-                                       android:fontFamily="@font/inter_medium"
-                                       android:paddingHorizontal="@dimen/_4sdp"
-                                       android:paddingVertical="@dimen/_4sdp"
-                                       android:textColor="@color/textColor"
-                                       android:textSize="@dimen/_10sdp"
-                                       android:textStyle="normal"
-                                       app:cardBackgroundColor="@color/shimmer_item_color"
-                                       app:cardCornerRadius="@dimen/_4sdp"
-                                       app:cardElevation="0dp" />
-
                                </androidx.appcompat.widget.LinearLayoutCompat>
                            </LinearLayout>
                            <LinearLayout
@@ -250,15 +225,6 @@
                                android:layout_height="match_parent"
                                android:orientation="horizontal">
 
-                               <androidx.cardview.widget.CardView
-                                   android:layout_width="@dimen/_80sdp"
-                                   android:layout_height="match_parent"
-
-                                   android:layout_marginLeft="@dimen/_7sdp"
-                                   app:cardBackgroundColor="@color/shimmer_item_color"
-                                   app:cardCornerRadius="@dimen/_3sdp"
-                                   app:cardElevation="0dp" />
-
                                <androidx.appcompat.widget.LinearLayoutCompat
 
                                    android:layout_width="match_parent"
@@ -267,22 +233,6 @@
                                    android:orientation="vertical">
                                    <androidx.cardview.widget.CardView
                                        android:layout_width="match_parent"
-                                       android:layout_height="@dimen/_15sdp"
-                                       android:layout_marginHorizontal="@dimen/_5sdp"
-                                       android:layout_weight="1"
-                                       android:background="@drawable/shimmer_text_bac"
-                                       android:fontFamily="@font/inter_medium"
-                                       android:paddingHorizontal="@dimen/_4sdp"
-                                       android:paddingVertical="@dimen/_4sdp"
-                                       android:textColor="@color/textColor"
-                                       android:textSize="@dimen/_10sdp"
-                                       android:textStyle="normal"
-                                       app:cardBackgroundColor="@color/shimmer_item_color"
-                                       app:cardCornerRadius="@dimen/_4sdp"
-                                       app:cardElevation="0dp" />
-                                   <androidx.cardview.widget.CardView
-                                       android:layout_width="match_parent"
-                                       android:layout_marginTop="@dimen/_5sdp"
                                        android:layout_height="@dimen/_15sdp"
                                        android:layout_marginHorizontal="@dimen/_5sdp"
                                        android:layout_weight="1"
@@ -439,37 +389,12 @@
                                android:layout_width="match_parent"
                                android:layout_height="match_parent"
                                android:orientation="horizontal">
-
-                               <androidx.cardview.widget.CardView
-                                   android:layout_width="@dimen/_80sdp"
-                                   android:layout_height="match_parent"
-
-                                   android:layout_marginLeft="@dimen/_7sdp"
-                                   app:cardBackgroundColor="@color/shimmer_item_color"
-                                   app:cardCornerRadius="@dimen/_3sdp"
-                                   app:cardElevation="0dp" />
-
                                <androidx.appcompat.widget.LinearLayoutCompat
 
                                    android:layout_width="match_parent"
                                    android:layout_height="match_parent"
                                    android:layout_weight="1"
                                    android:orientation="vertical">
-                                   <androidx.cardview.widget.CardView
-                                       android:layout_width="match_parent"
-                                       android:layout_height="@dimen/_15sdp"
-                                       android:layout_marginHorizontal="@dimen/_5sdp"
-                                       android:layout_weight="1"
-                                       android:background="@drawable/shimmer_text_bac"
-                                       android:fontFamily="@font/inter_medium"
-                                       android:paddingHorizontal="@dimen/_4sdp"
-                                       android:paddingVertical="@dimen/_4sdp"
-                                       android:textColor="@color/textColor"
-                                       android:textSize="@dimen/_10sdp"
-                                       android:textStyle="normal"
-                                       app:cardBackgroundColor="@color/shimmer_item_color"
-                                       app:cardCornerRadius="@dimen/_4sdp"
-                                       app:cardElevation="0dp" />
                                    <androidx.cardview.widget.CardView
                                        android:layout_width="match_parent"
                                        android:layout_marginTop="@dimen/_5sdp"
@@ -629,37 +554,12 @@
                                android:layout_width="match_parent"
                                android:layout_height="match_parent"
                                android:orientation="horizontal">
-
-                               <androidx.cardview.widget.CardView
-                                   android:layout_width="@dimen/_80sdp"
-                                   android:layout_height="match_parent"
-
-                                   android:layout_marginLeft="@dimen/_7sdp"
-                                   app:cardBackgroundColor="@color/shimmer_item_color"
-                                   app:cardCornerRadius="@dimen/_3sdp"
-                                   app:cardElevation="0dp" />
-
                                <androidx.appcompat.widget.LinearLayoutCompat
 
                                    android:layout_width="match_parent"
                                    android:layout_height="match_parent"
                                    android:layout_weight="1"
                                    android:orientation="vertical">
-                                   <androidx.cardview.widget.CardView
-                                       android:layout_width="match_parent"
-                                       android:layout_height="@dimen/_15sdp"
-                                       android:layout_marginHorizontal="@dimen/_5sdp"
-                                       android:layout_weight="1"
-                                       android:background="@drawable/shimmer_text_bac"
-                                       android:fontFamily="@font/inter_medium"
-                                       android:paddingHorizontal="@dimen/_4sdp"
-                                       android:paddingVertical="@dimen/_4sdp"
-                                       android:textColor="@color/textColor"
-                                       android:textSize="@dimen/_10sdp"
-                                       android:textStyle="normal"
-                                       app:cardBackgroundColor="@color/shimmer_item_color"
-                                       app:cardCornerRadius="@dimen/_4sdp"
-                                       app:cardElevation="0dp" />
                                    <androidx.cardview.widget.CardView
                                        android:layout_width="match_parent"
                                        android:layout_marginTop="@dimen/_5sdp"
@@ -819,37 +719,12 @@
                                android:layout_width="match_parent"
                                android:layout_height="match_parent"
                                android:orientation="horizontal">
-
-                               <androidx.cardview.widget.CardView
-                                   android:layout_width="@dimen/_80sdp"
-                                   android:layout_height="match_parent"
-
-                                   android:layout_marginLeft="@dimen/_7sdp"
-                                   app:cardBackgroundColor="@color/shimmer_item_color"
-                                   app:cardCornerRadius="@dimen/_3sdp"
-                                   app:cardElevation="0dp" />
-
                                <androidx.appcompat.widget.LinearLayoutCompat
 
                                    android:layout_width="match_parent"
                                    android:layout_height="match_parent"
                                    android:layout_weight="1"
                                    android:orientation="vertical">
-                                   <androidx.cardview.widget.CardView
-                                       android:layout_width="match_parent"
-                                       android:layout_height="@dimen/_15sdp"
-                                       android:layout_marginHorizontal="@dimen/_5sdp"
-                                       android:layout_weight="1"
-                                       android:background="@drawable/shimmer_text_bac"
-                                       android:fontFamily="@font/inter_medium"
-                                       android:paddingHorizontal="@dimen/_4sdp"
-                                       android:paddingVertical="@dimen/_4sdp"
-                                       android:textColor="@color/textColor"
-                                       android:textSize="@dimen/_10sdp"
-                                       android:textStyle="normal"
-                                       app:cardBackgroundColor="@color/shimmer_item_color"
-                                       app:cardCornerRadius="@dimen/_4sdp"
-                                       app:cardElevation="0dp" />
                                    <androidx.cardview.widget.CardView
                                        android:layout_width="match_parent"
                                        android:layout_marginTop="@dimen/_5sdp"

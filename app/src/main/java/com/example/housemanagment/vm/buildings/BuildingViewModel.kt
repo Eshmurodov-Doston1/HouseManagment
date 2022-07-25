@@ -16,6 +16,7 @@ import com.example.housemanagment.utils.AppConstant.BUILDING_LIST
 import com.example.housemanagment.utils.AppConstant.DOM_LIST
 import com.example.housemanagment.utils.AppConstant.ERROR_NO_INTERNET
 import com.example.housemanagment.utils.AppConstant.HOUSE_LIST
+import com.example.housemanagment.utils.AppConstant.HOUSE_SOLD_LIST
 import com.example.housemanagment.utils.networkHelper.NetworkHelper
 import com.example.housemanagment.utils.responseState.ResponseState
 import com.example.housemanagment.utils.sharedPreference.MySharedPreferences
@@ -111,6 +112,20 @@ class BuildingViewModel @Inject constructor(
             }
         }
     }
+
+    fun getSoldHouse(){
+       viewModelScope.launch {
+           val houseSoldUrl = "$BASE_URL$API$HOUSE_SOLD_LIST"
+           if (networkHelper.isNetworkConnected()){
+               apiRepository.methodeGET<HouseData>(houseSoldUrl,getHeaderMap())
+                   .catch { error->_flatData.emit(ResponseState.Error(error.hashCode(),error.message))}
+                   .collect{response->_houseData.emit(response)}
+           }else{
+               _houseData.emit(ResponseState.Error(ERROR_NO_INTERNET))
+           }
+       }
+    }
+
 
     fun getHeaderMap():HashMap<String,String>{
         var mapHeader = HashMap<String,String>()

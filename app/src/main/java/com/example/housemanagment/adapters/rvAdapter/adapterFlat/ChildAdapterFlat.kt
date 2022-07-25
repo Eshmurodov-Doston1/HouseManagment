@@ -41,12 +41,12 @@ class ChildAdapterFlat(
                 itemChildFlatBinding.chatBtn.setOnClickListener {
                     onItemClickListener.onItemClickCallSMS(house,position)
                 }
-
-                val builder: Zoomy.Builder = Zoomy.Builder(compositionRoot.mActivity)
-                    .target(itemChildFlatBinding.image)
-                    .enableImmersiveMode(false)
-                    .animateZooming(true)
-                builder.register()
+                // Image zoom
+//                val builder: Zoomy.Builder = Zoomy.Builder(compositionRoot.mActivity)
+//                    .target(itemChildFlatBinding.image)
+//                    .enableImmersiveMode(false)
+//                    .animateZooming(true)
+//                builder.register()
 
 
                 itemChildFlatBinding.apply {

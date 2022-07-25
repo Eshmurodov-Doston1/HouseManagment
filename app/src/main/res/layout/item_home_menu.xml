@@ -51,17 +51,6 @@
                     android:fontFamily="@font/inter_medium"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
-                <TextView
-                    android:id="@+id/users_tv"
-                    android:layout_weight="1"
-                    android:maxLines="1"
-                    android:textSize="@dimen/_11sdp"
-                    android:textColor="@color/white"
-                    android:textStyle="normal"
-                    android:text="25 заказов"
-                    android:fontFamily="@font/inter_medium"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

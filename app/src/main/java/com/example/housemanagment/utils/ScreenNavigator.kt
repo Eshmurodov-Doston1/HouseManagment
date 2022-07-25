@@ -37,9 +37,9 @@ class ScreenNavigator(
         navController.navigate(R.id.action_housesFragment_to_sectorFlatFragment,bundle,animationCreatePage())
     }
 
-    fun createCompanyWithDocument(placeData: PlaceData){
+    fun createCompanyWithDocument(building: Building){
         var bundle = Bundle()
-        bundle.putSerializable("placeData",placeData)
+        bundle.putSerializable("building",building)
         navController.navigate(R.id.action_documentFragment_to_companyFragment2,bundle,animationCreatePage())
     }
 
@@ -50,11 +50,19 @@ class ScreenNavigator(
         navController.navigate(R.id.action_companyFragment_to_housesFragment,bundle,animationCreatePage())
     }
 
-    fun createFragmentFlatData(house: House){
+    fun createFragmentFlatData(house: House,isView:Int){
         var bundle = Bundle()
         bundle.putSerializable("house",house)
-        navController.navigate(R.id.action_sectorFlatFragment_to_flatDataFragment,bundle,animationCreatePage())
+        when(isView){
+            0->{
+                navController.navigate(R.id.action_sectorFlatFragment_to_flatDataFragment,bundle,animationCreatePage())
+            }
+            1->{
+                navController.navigate(R.id.flatDataFragment,bundle,animationCreatePage())
+            }
+        }
     }
+
 
     fun animationCreatePage() = NavOptions.Builder()
             .setEnterAnim(R.anim.enter)

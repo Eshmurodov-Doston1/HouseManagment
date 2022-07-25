@@ -7,21 +7,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.viewModels
 import com.dolatkia.animatedThemeManager.AppTheme
 import com.example.housemanagment.R
 import com.example.housemanagment.adapters.rvAdapter.RvGenericAdapter
+import com.example.housemanagment.adapters.rvAdapter.adapterFlat.ChildAdapterFlat
 import com.example.housemanagment.databinding.FragmentDocumentBinding
+import com.example.housemanagment.models.buildingData.Building
 import com.example.housemanagment.models.demoMenu.DemoMenu
 import com.example.housemanagment.models.demoMenu.place.PlaceData
+import com.example.housemanagment.models.house.House
 import com.example.housemanagment.presentation.pages.base.BasePage
 import com.example.housemanagment.utils.AppConstant.ONE
 import com.example.housemanagment.utils.AppConstant.THREE
 import com.example.housemanagment.utils.AppConstant.TWO
 import com.example.housemanagment.utils.AppConstant.ZERO
-import com.example.housemanagment.utils.extension.gone
-import com.example.housemanagment.utils.extension.isNotNullOrEmpty
-import com.example.housemanagment.utils.extension.textApp
-import com.example.housemanagment.utils.extension.visible
+import com.example.housemanagment.utils.extension.*
+import com.example.housemanagment.vm.buildings.BuildingViewModel
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -40,13 +43,16 @@ class DocumentFragment : BasePage(R.layout.fragment_document) {
 
     private var _binding:FragmentDocumentBinding?=null
     private val binding get() = _binding!!
-    private lateinit var rvGenericAdapter: RvGenericAdapter<PlaceData>
+    private val buildingViewModel:BuildingViewModel by viewModels()
+    private lateinit var listBuilding:ArrayList<Building>
+    private lateinit var rvGenericAdapter: RvGenericAdapter<Building>
+    private lateinit var childAdapterFlat:ChildAdapterFlat
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
        _binding = FragmentDocumentBinding.inflate(inflater,container,false)
-        //setupBarChart()
+        listBuilding = ArrayList()
         bindingView = binding
         return binding.root
     }
@@ -56,21 +62,53 @@ class DocumentFragment : BasePage(R.layout.fragment_document) {
         val appTheme1 = appTheme as com.example.housemanagment.uiTheme.AppTheme
         binding.apply {
             when(demoMenu?.cateGory){
-                in ZERO..ONE->{
-                    rvGenericAdapter = RvGenericAdapter(object:RvGenericAdapter.OnItemClickListener<PlaceData>{
-                        override fun onItemClick(demoMenu: PlaceData, position: Int, layoutRes: Int) {
-                            appCompositionRoot.screenNavigator.createCompanyWithDocument(demoMenu)
+                ZERO->{
+                    launch {
+                        buildingViewModel.getDataBuilding()
+                        buildingViewModel.buildingData.fetchResult(appCompositionRoot.uiControllerApp){ result->
+                            listBuilding = result?.success?.list as ArrayList<Building>
+                            if(listBuilding.isEmpty()) includeApp.lottie.visible()
+                            rvGenericAdapter = RvGenericAdapter(object:RvGenericAdapter.OnItemClickListener<Building>{
+                                override fun onItemClick(demoMenu: Building, position: Int, layoutRes: Int) {
+                                    appCompositionRoot.screenNavigator.createCompanyWithDocument(demoMenu)
+                                }
+                            },R.layout.item_place,listBuilding,appCompositionRoot.mContext,appTheme1){ t->}
+                            rv.adapter = rvGenericAdapter
+                            searChAllHome()
                         }
-                    },R.layout.item_place,getPlaceData(),appCompositionRoot.mContext,appTheme1){t->}
-                    rv.adapter = rvGenericAdapter
-                    searChAllHome()
+                    }
+                    include.shimmer.stopShimmer()
+                    consToolbar.visible()
+                    rv.visible()
+                    include.consSimmer.gone()
                 }
-                TWO->{
+                    ONE->{
+                     include.consSimmer.gone()
+                     includeShim.consShimmer.visible()
+                        buildingViewModel.getDataBuilding()
+                        launch {
+                            buildingViewModel.getSoldHouse()
+                            buildingViewModel.houseData.fetchResult(appCompositionRoot.uiControllerApp){ result->
+                                childAdapterFlat = ChildAdapterFlat(result?.success?.list as ArrayList<House>,object:ChildAdapterFlat.OnItemClickListener{
+                                    override fun onItemClick(house: House, position: Int) {
+                                        appCompositionRoot.screenNavigator.createFragmentFlatData(house, ONE)
+                                    }
 
-                }
-                THREE->{
+                                    override fun onItemClickCall(house: House, position: Int) {
+                                        appCompositionRoot.call("+998901277233")
+                                    }
 
-                }
+                                    override fun onItemClickCallSMS(house: House, position: Int) {
+
+                                    }
+                                },appCompositionRoot,appTheme1)
+                                rv.adapter = childAdapterFlat
+                                includeShim.consShimmer.gone()
+                                consToolbar.visible()
+                                rv.visible()
+                            }
+                        }
+                    }
             }
         }
     }
@@ -79,14 +117,7 @@ class DocumentFragment : BasePage(R.layout.fragment_document) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-
             include.shimmer.startShimmer()
-            Handler(Looper.getMainLooper()).postDelayed({
-                include.shimmer.stopShimmer()
-                consToolbar.visible()
-                rv.visible()
-                include.consSimmer.gone()
-            },2000)
 
 
 
@@ -120,7 +151,6 @@ class DocumentFragment : BasePage(R.layout.fragment_document) {
 
     private fun searChAllHome() {
         binding.apply {
-
             search.addTextChangedListener {
               filterApp(it.toString().trim())
             }
@@ -130,18 +160,18 @@ class DocumentFragment : BasePage(R.layout.fragment_document) {
     }
 
     fun filterApp(str:String){
-        var listData = ArrayList<PlaceData>()
+        var listData = ArrayList<Building>()
         if (str.isNotNullOrEmpty()){
-            getPlaceData().forEach { placeData ->
-                if (placeData.name.trim().lowercase().contains(str.lowercase())){
-                    listData.add(placeData)
+            listBuilding.forEach { building ->
+                if (building.name.trim().lowercase().contains(str.lowercase())){
+                    listData.add(building)
                 }
             }
         }
         if (str.isNotNullOrEmpty()){
             rvGenericAdapter.filterData(listData)
         }else{
-            rvGenericAdapter.filterData(getPlaceData())
+            rvGenericAdapter.filterData(listBuilding)
         }
     }
 

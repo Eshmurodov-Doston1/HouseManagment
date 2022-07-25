@@ -16,7 +16,7 @@ class ApiRepository @Inject constructor(
     }
 
     suspend fun <K> methodePOSTnoBody(fullUrl:String,headerMap: HashMap<String,String>):Flow<ResponseState<K?>>{
-        return responseFetcher.getFlowResponseState(authService.methodePOSTnoBody(fullUrl,headerMap))
+        return responseFetcher.getFlowResponseState(authService.methodePOST(fullUrl, headerMap = headerMap, request = ""))
     }
 
 

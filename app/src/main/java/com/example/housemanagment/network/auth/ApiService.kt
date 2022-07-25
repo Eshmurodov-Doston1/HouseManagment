@@ -8,14 +8,7 @@ interface ApiService {
     @POST
     suspend fun <K> methodePOST(
         @Url url:String,
-        @Body request: Any,
-        @HeaderMap headerMap:HashMap<String,String>,
-        @QueryMap mapQuery:HashMap<String,String> = HashMap()
-    ):Response<K>
-
-    @POST
-    suspend fun <K> methodePOSTnoBody(
-        @Url url:String,
+        @Body request: Any?,
         @HeaderMap headerMap:HashMap<String,String>,
         @QueryMap mapQuery:HashMap<String,String> = HashMap()
     ):Response<K>
