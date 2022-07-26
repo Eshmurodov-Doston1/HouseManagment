@@ -171,6 +171,12 @@ fun Double.format():String{
     return formatter
 }
 
+fun Long.format():String{
+    val formatter =  NumberFormat.getNumberInstance(Locale.getDefault()).format(this)
+    return formatter
+}
+
+
 fun <A: Activity> Activity.startNewActivity(activity:Class<A>){
     Intent(this,activity).also {
         it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

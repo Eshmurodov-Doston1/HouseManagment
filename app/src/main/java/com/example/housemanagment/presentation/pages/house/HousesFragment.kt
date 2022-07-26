@@ -13,6 +13,7 @@ import com.example.housemanagment.databinding.FragmentHousesBinding
 import com.example.housemanagment.models.blockData.Block
 import com.example.housemanagment.models.flat.Flat
 import com.example.housemanagment.presentation.pages.base.BasePage
+import com.example.housemanagment.utils.AppConstant.TWO
 import com.example.housemanagment.utils.extension.*
 import com.example.housemanagment.vm.buildings.BuildingViewModel
 import kotlinx.coroutines.launch

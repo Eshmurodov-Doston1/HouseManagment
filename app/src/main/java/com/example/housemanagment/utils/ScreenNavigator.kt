@@ -6,10 +6,7 @@ import androidx.navigation.NavOptions
 import com.example.housemanagment.R
 import com.example.housemanagment.models.blockData.Block
 import com.example.housemanagment.models.buildingData.Building
-import com.example.housemanagment.models.demoMenu.DemoItem
 import com.example.housemanagment.models.demoMenu.DemoMenu
-import com.example.housemanagment.models.demoMenu.flat.Flat
-import com.example.housemanagment.models.demoMenu.place.PlaceData
 import com.example.housemanagment.models.house.House
 
 class ScreenNavigator(
@@ -50,7 +47,7 @@ class ScreenNavigator(
         navController.navigate(R.id.action_companyFragment_to_housesFragment,bundle,animationCreatePage())
     }
 
-    fun createFragmentFlatData(house: House,isView:Int){
+    fun createFragmentFlatData(house: House, isView:Int){
         var bundle = Bundle()
         bundle.putSerializable("house",house)
         when(isView){

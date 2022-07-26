@@ -39,8 +39,7 @@ class EmployeesFragment : BasePage(R.layout.fragment_employees) {
         binding.apply {
             includeShimmer.shimmer.startShimmer()
             Handler(Looper.getMainLooper()).postDelayed({
-                consToolbar.visible()
-                swipeRefresh.visible()
+                includeApp.lottie.visible()
                 includeShimmer.consShimmer.gone()
             },2000)
 

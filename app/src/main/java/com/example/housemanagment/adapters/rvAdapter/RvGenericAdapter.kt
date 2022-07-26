@@ -16,10 +16,10 @@ import com.example.housemanagment.models.demoMenu.DemoItem
 import com.example.housemanagment.models.demoMenu.DemoMenu
 import com.example.housemanagment.models.demoMenu.cash.CashItem
 import com.example.housemanagment.models.demoMenu.employe.Employee
-import com.example.housemanagment.models.demoMenu.place.PlaceData
 import com.example.housemanagment.models.flat.Flat
 import com.example.housemanagment.uiTheme.AppTheme
 import com.example.housemanagment.utils.AppConstant.ONE
+import com.example.housemanagment.utils.AppConstant.THREE
 import com.example.housemanagment.utils.AppConstant.TWO
 import com.example.housemanagment.utils.AppConstant.ZERO
 import com.example.housemanagment.utils.extension.format
@@ -31,6 +31,7 @@ class RvGenericAdapter<T:Any>(
     var currentList:ArrayList<T>,
     private val context:Context,
     private val appTheme: AppTheme?=null,
+    private val typePlease:Int?=null,
     private val onClick:(T:Any)->Unit
 ):RecyclerView.Adapter<GenericViewHolder<T>>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenericViewHolder<T> {
@@ -39,7 +40,7 @@ class RvGenericAdapter<T:Any>(
     }
 
     override fun onBindViewHolder(holder: GenericViewHolder<T>, position: Int) {
-        holder.onBind(currentList[position],position,layoutRes,onItemClickListener,context,appTheme,onClick)
+        holder.onBind(currentList[position],position,layoutRes,onItemClickListener,context,appTheme,typePlease,onClick)
     }
 
     override fun getItemCount(): Int {
@@ -70,6 +71,7 @@ open class GenericViewHolder<T>(itemView:View):RecyclerView.ViewHolder(itemView)
         onItemClickListener: RvGenericAdapter.OnItemClickListener<T>,
         context: Context,
         appTheme: AppTheme?,
+        typePlease: Int?,
         onClick: (T: Any) -> Unit
     ) {
         when(layoutRes){
@@ -84,14 +86,13 @@ open class GenericViewHolder<T>(itemView:View):RecyclerView.ViewHolder(itemView)
                 itemPlaceBinding.card.setOnClickListener {
                     onItemClickListener.onItemClick(data,position,layoutRes)
                 }
-                itemPlaceBinding.textBlock.textApp("Наши дома")
-
                 if (appTheme!=null){
                     itemPlaceBinding.name.setTextColor(appTheme.textColorApp(context))
                     itemPlaceBinding.quantity.setTextColor(appTheme.textColorApp(context))
                     itemPlaceBinding.summ.setTextColor(appTheme.textColorApp(context))
                     itemPlaceBinding.card.setCardBackgroundColor(appTheme.itemCardColor(context))
                 }
+                itemPlaceBinding.textBlock.textApp(context.getString(R.string.flats))
             }
 
             R.layout.item_home_menu->{
@@ -120,7 +121,7 @@ open class GenericViewHolder<T>(itemView:View):RecyclerView.ViewHolder(itemView)
             R.layout.item_cash->{
                 val cashItemBinding = ItemCashBinding.bind(itemView)
                 val cashItem = data as CashItem
-                cashItemBinding.summ.textApp("${cashItem.sum.format()} so'm")
+                cashItemBinding.summ.textApp("${cashItem.sum.format()} ${context.getString(R.string.money_type)}")
                 cashItemBinding.textData.textApp(cashItem.date)
                 cashItemBinding.fullName.textApp(cashItem.fullName)
                 when(cashItem.status){
@@ -154,7 +155,6 @@ open class GenericViewHolder<T>(itemView:View):RecyclerView.ViewHolder(itemView)
                 itemPlaceBinding.card.setOnClickListener {
                     onItemClickListener.onItemClick(data,position,layoutRes)
                 }
-                itemPlaceBinding.textBlock.textApp("Наши дома")
 
                 if (appTheme!=null){
                     itemPlaceBinding.name.setTextColor(appTheme.textColorApp(context))
@@ -162,6 +162,15 @@ open class GenericViewHolder<T>(itemView:View):RecyclerView.ViewHolder(itemView)
                     itemPlaceBinding.summ.setTextColor(appTheme.textColorApp(context))
                     itemPlaceBinding.card.setCardBackgroundColor(appTheme.itemCardColor(context))
                 }
+
+                if (typePlease!=null){
+                    when(typePlease){
+                        ZERO->{
+                            itemPlaceBinding.textBlock.textApp(context.getString(R.string.category))
+                        }
+                    }
+                }
+
             }
             R.layout.item_place_company->{
                 itemView.animation = loadAnimation(context)
@@ -173,7 +182,7 @@ open class GenericViewHolder<T>(itemView:View):RecyclerView.ViewHolder(itemView)
                 itemPlaceBinding.card.setOnClickListener {
                     onItemClickListener.onItemClick(data,position,layoutRes)
                 }
-                itemPlaceBinding.textBlock.textApp("Наши дома")
+                itemPlaceBinding.textBlock.textApp(context.getString(R.string.house_cat))
 
                 if (appTheme!=null){
                     itemPlaceBinding.name.setTextColor(appTheme.textColorApp(context))

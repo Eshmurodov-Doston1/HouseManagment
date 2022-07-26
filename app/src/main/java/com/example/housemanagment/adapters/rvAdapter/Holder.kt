@@ -12,5 +12,6 @@ interface Holder<T> {
         onItemClickListener: RvGenericAdapter.OnItemClickListener<T>,
         context: Context,
         appTheme: AppTheme?,
+        typePlease:Int?,
         onClick:(T:Any)->Unit)
 }

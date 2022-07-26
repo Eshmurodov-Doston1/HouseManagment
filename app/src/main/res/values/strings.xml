@@ -61,7 +61,8 @@
     <string name="payment">Оплата</string>
     <string name="paid">Оплаченный</string>
     <string name="all_paid">Всего к оплате</string>
-    <string name="home_sum">Цена дома</string>
+    <string name="home_sum">Выплаченная сумма</string>
+    <string name="money_type">сўм</string>
     <string name="sold_out_flat">Распроданный апартаменты</string>
     <string name="logout_text">Выйти из аккаунта</string>
     <string name="day_mode">Дневной режим</string>
@@ -70,5 +71,12 @@
     <string name="server_error">В настоящее время есть проблема с сервером, повторите попытку позже.</string>
     <string name="log_out">Вы хотите выйти из своей учетной записи?</string>
     <string name="yes">Да</string>
+    <string name="cash_t">Наличные:</string>
+    <string name="card_t">Пластиковая карта:</string>
+    <string name="card_bank_t">Банковская карта:</string>
+    <string name="card_and_cash_t">Всего к оплате:</string>
+    <string name="category">Разделы</string>
+    <string name="house_cat">Дома</string>
+    <string name="flats">Квартиры</string>
 
 </resources>

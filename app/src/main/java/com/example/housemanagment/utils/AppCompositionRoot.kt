@@ -5,8 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
-import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -19,14 +17,12 @@ import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.example.housemanagment.R
 import com.example.housemanagment.databinding.CustomToastBinding
-import com.example.housemanagment.models.AppModels
 import com.example.housemanagment.models.demoMenu.chat.ChatData
 import com.example.housemanagment.uiTheme.AppTheme
 import com.example.housemanagment.utils.extension.textApp
 import com.example.housemanagment.utils.sharedPreference.MySharedPreferences
 import com.example.housemanagment.utils.uiController.UiController
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.permissionx.guolindev.PermissionX
 
 class AppCompositionRoot(

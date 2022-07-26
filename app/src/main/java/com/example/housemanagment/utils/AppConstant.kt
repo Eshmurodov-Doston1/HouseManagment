@@ -28,6 +28,8 @@ object AppConstant {
     const val DOM_LIST = "/dom/list"
     const val HOUSE_LIST = "/house/list/"
     const val HOUSE_SOLD_LIST = "/house/sold"
+    const val HOME_GET_LIST = "/house/get/"
+    const val TRANSACTION_LIST = "/transaction/index"
     const val TYPE_HTTP="Content-Type"
     const val JSON_APP = "application/json"
     const val ACCEPT = "Accept"

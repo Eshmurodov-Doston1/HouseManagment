@@ -1,6 +1,5 @@
 package com.example.housemanagment.presentation.pages.flatData
 
-import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.Typeface
 import android.os.Bundle
@@ -11,27 +10,24 @@ import androidx.fragment.app.viewModels
 import com.dolatkia.animatedThemeManager.AppTheme
 import com.example.housemanagment.R
 import com.example.housemanagment.databinding.FragmentFlatDataBinding
-import com.example.housemanagment.models.demoMenu.flat.Flat
+import com.example.housemanagment.models.flatData.Home
 import com.example.housemanagment.models.house.House
-import com.example.housemanagment.presentation.activitys.MainActivity
 import com.example.housemanagment.presentation.pages.base.BasePage
-import com.example.housemanagment.utils.*
 import com.example.housemanagment.utils.AppConstant.ZERO
-import com.example.housemanagment.utils.extension.format
-import com.example.housemanagment.utils.extension.textApp
+import com.example.housemanagment.utils.extension.*
 import com.example.housemanagment.vm.AuthViewModel
-import com.google.android.material.appbar.AppBarLayout
+import com.example.housemanagment.vm.buildings.BuildingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import ir.androidexception.datatable.model.DataTableHeader
 import ir.androidexception.datatable.model.DataTableRow
-import java.math.BigInteger
+import kotlinx.coroutines.launch
 
 
 private const val ARG_PARAM1 = "house"
 @AndroidEntryPoint
 class FlatDataFragment : BasePage(R.layout.fragment_flat_data) {
     private var house: House? = null
-
+    private val buildingViewModel:BuildingViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -41,6 +37,7 @@ class FlatDataFragment : BasePage(R.layout.fragment_flat_data) {
     private var _binding:FragmentFlatDataBinding?=null
     private val binding get() = _binding!!
     private val authViewModel:AuthViewModel by viewModels()
+    private lateinit var listHomeData:ArrayList<Home>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,6 +49,7 @@ class FlatDataFragment : BasePage(R.layout.fragment_flat_data) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
+            listHomeData = ArrayList()
             textToolbar.textApp("${appCompositionRoot.mActivity.getString(R.string.number)} ${house?.number.toString()}")
             back.setOnClickListener {
                 appCompositionRoot.screenNavigator.popBackStack()
@@ -66,22 +64,48 @@ class FlatDataFragment : BasePage(R.layout.fragment_flat_data) {
             val rows = ArrayList<DataTableRow>()
 
 
-            var all_sum:BigInteger = BigInteger.ZERO
-            var home_sum:BigInteger = BigInteger.ZERO
+            var all_sum = 0.0
+            var home_sum = 0.0
 
+            buildingViewModel.getHomeData(house?.id?:0)
 
+            launch {
+                buildingViewModel.homeData.fetchResult(appCompositionRoot.uiControllerApp){ result->
+                    if (result?.success?.list?.isEmpty() == true){
+                        binding.includeApp.lottie.visible()
+                        binding.cardSum.gone()
+                    }
 
-            for (i in 1..30) {
-                val row = DataTableRow.Builder()
-                    .value("$i.07.2022")
-                    .value((i * 1000000).toString() + " so'm")
-                    .value((i * 100000).toString() + " so'm")
-                    .build()
+                    result?.success?.list?.onEach { home->
+                        val row = DataTableRow.Builder()
+                            .value(home.month_id)
+                            .value(home.pending.toDouble().format() + requireActivity().getString(R.string.money_type))
+                            .value(home.paid.toDouble().format()+ requireActivity().getString(R.string.money_type))
+                            .build()
+                        rows.add(row)
+                        all_sum += home.pending.toDouble()
+                        home_sum += home.paid.toDouble()
+                    }
 
-                all_sum += BigInteger((i * 100000).toString())
-                home_sum += BigInteger((i * 1000000).toString())
-                rows.add(row)
+                    dataTable.headerTextSize = 15F
+                    dataTable.rowTextSize = 12F
+                    dataTable.typeface = Typeface.DEFAULT
+                    dataTable.header = header
+                    dataTable.rows = rows
+                    dataTable.inflate(appCompositionRoot.mContext)
+                    paidText.textApp(all_sum.format())
+                    homeSum.textApp(home_sum.format())
+                    dataTable.shadow = 0f
+                    var data = home_sum.minus(all_sum)
+
+                    if (data.toLong()<ZERO){
+                        debtText.textApp(data.format())
+                    }else{
+                        debtText.textApp("_")
+                    }
+                }
             }
+
 
            if (authViewModel.sharedPreferences.theme == true){
                viewTableColor(R.color.textDarkColor,R.color.backgroundDarkColor)
@@ -90,24 +114,10 @@ class FlatDataFragment : BasePage(R.layout.fragment_flat_data) {
            }else{
                viewTableColor(R.color.textColor,R.color.backgroundColor)
                back.setCardBackgroundColor(requireActivity().getColor(R.color.backgroundColor))
-               backIcon.setColorFilter(requireActivity().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP)
+               backIcon.setColorFilter(requireActivity().getColor(R.color.black), PorterDuff.Mode.SRC_ATOP)
            }
 
-            dataTable.headerTextSize = 15F
-            dataTable.rowTextSize = 12F
-            dataTable.typeface = Typeface.DEFAULT
-            dataTable.header = header
-            dataTable.rows = rows
-            dataTable.inflate(appCompositionRoot.mContext)
-            paidText.textApp(all_sum.toDouble().format())
-            homeSum.textApp(home_sum.toDouble().format())
-            dataTable.shadow = 0f
-            var data = all_sum.minus(home_sum)
-            if (data.toLong()<ZERO){
-                debtText.textApp(data.toDouble().format())
-            }else{
-                debtText.textApp("_")
-            }
+
         }
     }
 

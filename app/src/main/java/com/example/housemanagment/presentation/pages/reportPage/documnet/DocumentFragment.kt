@@ -1,8 +1,7 @@
 package com.example.housemanagment.presentation.pages.reportPage.documnet
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,12 +14,9 @@ import com.example.housemanagment.adapters.rvAdapter.adapterFlat.ChildAdapterFla
 import com.example.housemanagment.databinding.FragmentDocumentBinding
 import com.example.housemanagment.models.buildingData.Building
 import com.example.housemanagment.models.demoMenu.DemoMenu
-import com.example.housemanagment.models.demoMenu.place.PlaceData
 import com.example.housemanagment.models.house.House
 import com.example.housemanagment.presentation.pages.base.BasePage
 import com.example.housemanagment.utils.AppConstant.ONE
-import com.example.housemanagment.utils.AppConstant.THREE
-import com.example.housemanagment.utils.AppConstant.TWO
 import com.example.housemanagment.utils.AppConstant.ZERO
 import com.example.housemanagment.utils.extension.*
 import com.example.housemanagment.vm.buildings.BuildingViewModel
@@ -65,6 +61,7 @@ class DocumentFragment : BasePage(R.layout.fragment_document) {
                 ZERO->{
                     launch {
                         buildingViewModel.getDataBuilding()
+                        includeShim.consShimmer.gone()
                         buildingViewModel.buildingData.fetchResult(appCompositionRoot.uiControllerApp){ result->
                             listBuilding = result?.success?.list as ArrayList<Building>
                             if(listBuilding.isEmpty()) includeApp.lottie.visible()
@@ -91,6 +88,7 @@ class DocumentFragment : BasePage(R.layout.fragment_document) {
                             buildingViewModel.houseData.fetchResult(appCompositionRoot.uiControllerApp){ result->
                                 childAdapterFlat = ChildAdapterFlat(result?.success?.list as ArrayList<House>,object:ChildAdapterFlat.OnItemClickListener{
                                     override fun onItemClick(house: House, position: Int) {
+                                        Log.e("HouseData", house.toString())
                                         appCompositionRoot.screenNavigator.createFragmentFlatData(house, ONE)
                                     }
 
@@ -101,7 +99,7 @@ class DocumentFragment : BasePage(R.layout.fragment_document) {
                                     override fun onItemClickCallSMS(house: House, position: Int) {
 
                                     }
-                                },appCompositionRoot,appTheme1)
+                                },appCompositionRoot,appTheme1, docPos = 1)
                                 rv.adapter = childAdapterFlat
                                 includeShim.consShimmer.gone()
                                 consToolbar.visible()

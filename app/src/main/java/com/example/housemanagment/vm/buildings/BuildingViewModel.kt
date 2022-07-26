@@ -6,17 +6,20 @@ import com.example.housemanagment.BuildConfig.BASE_URL
 import com.example.housemanagment.database.repository.buildingRepo.BuildingRepo
 import com.example.housemanagment.models.blockData.BlockData
 import com.example.housemanagment.models.buildingData.BuildingData
-import com.example.housemanagment.models.flat.Flat
 import com.example.housemanagment.models.flat.FlatData
+import com.example.housemanagment.models.flatData.HomeData
 import com.example.housemanagment.models.house.HouseData
+import com.example.housemanagment.models.money.Money
 import com.example.housemanagment.network.rePository.ApiRepository
 import com.example.housemanagment.utils.AppConstant
 import com.example.housemanagment.utils.AppConstant.API
 import com.example.housemanagment.utils.AppConstant.BUILDING_LIST
 import com.example.housemanagment.utils.AppConstant.DOM_LIST
 import com.example.housemanagment.utils.AppConstant.ERROR_NO_INTERNET
+import com.example.housemanagment.utils.AppConstant.HOME_GET_LIST
 import com.example.housemanagment.utils.AppConstant.HOUSE_LIST
 import com.example.housemanagment.utils.AppConstant.HOUSE_SOLD_LIST
+import com.example.housemanagment.utils.AppConstant.TRANSACTION_LIST
 import com.example.housemanagment.utils.networkHelper.NetworkHelper
 import com.example.housemanagment.utils.responseState.ResponseState
 import com.example.housemanagment.utils.sharedPreference.MySharedPreferences
@@ -53,6 +56,12 @@ class BuildingViewModel @Inject constructor(
     // TODO: getData House Data
     val houseData:StateFlow<ResponseState<HouseData?>> get() =_houseData
     private var _houseData = MutableStateFlow<ResponseState<HouseData?>>(ResponseState.Loading)
+    // TODO: getData Home Data
+    val homeData:StateFlow<ResponseState<HomeData?>> get() =_homeData
+    private var _homeData = MutableStateFlow<ResponseState<HomeData?>>(ResponseState.Loading)
+    // TODO: getData Money Data
+    val moneyData:StateFlow<ResponseState<Money?>> get() =_moneyData
+    private var _moneyData = MutableStateFlow<ResponseState<Money?>>(ResponseState.Loading)
 
     fun getDataBuilding(){
         viewModelScope.launch {
@@ -126,6 +135,34 @@ class BuildingViewModel @Inject constructor(
        }
     }
 
+
+
+    fun getHomeData(id:Int){
+        viewModelScope.launch {
+            var urlHomeData = "$BASE_URL$API$HOME_GET_LIST$id"
+            if (networkHelper.isNetworkConnected()){
+                apiRepository.methodeGET<HomeData>(urlHomeData,getHeaderMap())
+                    .catch { error->_homeData.emit(ResponseState.Error(error.hashCode(),error.message))}
+                    .collect{response->_homeData.emit(response)}
+            }else{
+                _homeData.emit(ResponseState.Error(ERROR_NO_INTERNET))
+            }
+        }
+    }
+
+
+    fun getMoneyOperation(){
+        viewModelScope.launch {
+            val moneyOperationFullUrl="$BASE_URL$API$TRANSACTION_LIST"
+            if (networkHelper.isNetworkConnected()){
+                apiRepository.methodeGET<Money>(moneyOperationFullUrl,getHeaderMap())
+                    .catch { error->_moneyData.emit(ResponseState.Error(error.hashCode(),error.message))}
+                    .collect{response->_moneyData.emit(response)}
+            }else{
+                _moneyData.emit(ResponseState.Error(ERROR_NO_INTERNET))
+            }
+        }
+    }
 
     fun getHeaderMap():HashMap<String,String>{
         var mapHeader = HashMap<String,String>()

@@ -71,6 +71,7 @@
                         android:id="@+id/linear"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_6sdp"
                         android:minHeight="@dimen/_70sdp"
                         android:orientation="vertical"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -187,80 +188,6 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/term_linear"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/term_hint"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/inter_medium"
-                                android:maxLines="1"
-                                android:padding="@dimen/_2sdp"
-                                android:text="@string/term"
-                                android:textColor="@color/hintColor"
-                                android:textSize="@dimen/_9sdp"
-                                android:textStyle="normal" />
-
-                            <TextView
-                                android:id="@+id/term_text"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_3sdp"
-                                android:layout_marginEnd="@dimen/_2sdp"
-                                android:layout_weight="1"
-                                android:ellipsize="end"
-                                android:fontFamily="@font/inter_medium"
-                                android:maxLines="2"
-                                android:padding="@dimen/_2sdp"
-                                android:text="36 Месяцев"
-                                android:textColor="@color/textColor"
-                                android:textSize="@dimen/_9sdp"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/paid_for_linear"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/paid_for_hint"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/inter_medium"
-                                android:maxLines="1"
-                                android:padding="@dimen/_2sdp"
-                                android:text="@string/paid_for"
-                                android:textColor="@color/hintColor"
-                                android:textSize="@dimen/_9sdp"
-                                android:textStyle="normal" />
-
-                            <TextView
-                                android:id="@+id/paid_for_text"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_3sdp"
-                                android:layout_marginEnd="@dimen/_2sdp"
-                                android:layout_weight="1"
-                                android:ellipsize="end"
-                                android:fontFamily="@font/inter_medium"
-                                android:maxLines="2"
-                                android:padding="@dimen/_2sdp"
-                                android:text="31 Месяц"
-                                android:textColor="@color/textColor"
-                                android:textSize="@dimen/_9sdp"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
                             android:id="@+id/paid_out_linear"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -296,81 +223,6 @@
                                 android:textStyle="bold" />
 
                         </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/left_linear"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/left_hint"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/inter_medium"
-                                android:maxLines="1"
-                                android:padding="@dimen/_2sdp"
-                                android:text="@string/left"
-                                android:textColor="@color/hintColor"
-                                android:textSize="@dimen/_9sdp"
-                                android:textStyle="normal" />
-
-                            <TextView
-                                android:id="@+id/left_text"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_3sdp"
-                                android:layout_marginEnd="@dimen/_2sdp"
-                                android:layout_weight="1"
-                                android:ellipsize="end"
-                                android:fontFamily="@font/inter_medium"
-                                android:maxLines="2"
-                                android:padding="@dimen/_2sdp"
-                                android:text="3 831 591"
-                                android:textColor="@color/textColor"
-                                android:textSize="@dimen/_9sdp"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/debt_linear"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/debt_hint"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/inter_medium"
-                                android:maxLines="1"
-                                android:padding="@dimen/_2sdp"
-                                android:text="@string/debt"
-                                android:textColor="@color/hintColor"
-                                android:textSize="@dimen/_9sdp"
-                                android:textStyle="normal" />
-
-                            <TextView
-                                android:id="@+id/debt_text"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_3sdp"
-                                android:layout_marginEnd="@dimen/_2sdp"
-                                android:layout_weight="1"
-                                android:ellipsize="end"
-                                android:fontFamily="@font/inter_medium"
-                                android:maxLines="2"
-                                android:padding="@dimen/_2sdp"
-                                android:text="312 491 658"
-                                android:textColor="@color/textColor"
-                                android:textSize="@dimen/_9sdp"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
-
                         <LinearLayout
                             android:id="@+id/square_linear"
                             android:layout_width="match_parent"

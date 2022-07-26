@@ -13,6 +13,7 @@ import com.example.housemanagment.databinding.FragmentCompanyBinding
 import com.example.housemanagment.models.blockData.Block
 import com.example.housemanagment.models.buildingData.Building
 import com.example.housemanagment.presentation.pages.base.BasePage
+import com.example.housemanagment.utils.AppConstant.ONE
 import com.example.housemanagment.utils.extension.*
 import com.example.housemanagment.vm.buildings.BuildingViewModel
 import kotlinx.coroutines.launch
@@ -118,7 +119,7 @@ class CompanyFragment : BasePage(R.layout.fragment_company) {
                     override fun onItemClick(block: Block, position: Int, layoutRes: Int) {
                         appCompositionRoot.screenNavigator.createFlatScreen(block)
                     }
-                },R.layout.item_place_company,listData,appCompositionRoot.mContext,appTheme){ t->}
+                },R.layout.item_place_company,listData,appCompositionRoot.mContext,appTheme,ONE){ t->}
                 binding.rvHouse.adapter = genericAdapterPlace
 
                 binding.include.shimmer.stopShimmer()

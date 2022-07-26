@@ -13,6 +13,7 @@ import com.example.housemanagment.databinding.FragmentReportBinding
 import com.example.housemanagment.models.buildingData.Building
 import com.example.housemanagment.models.demoMenu.DemoMenu
 import com.example.housemanagment.presentation.pages.base.BasePage
+import com.example.housemanagment.utils.AppConstant.ZERO
 import com.example.housemanagment.utils.extension.fetchResult
 import com.example.housemanagment.utils.extension.gone
 import com.example.housemanagment.utils.extension.loadAnimation
@@ -82,7 +83,7 @@ class ReportFragment : BasePage(R.layout.fragment_report) {
                         override fun onItemClick(demoMenu: Building, position: Int, layoutRes: Int) {
                             appCompositionRoot.screenNavigator.createCompany(demoMenu)
                         }
-                    },R.layout.item_place,result?.success?.list as ArrayList<Building>,appCompositionRoot.mContext,appTheme){t->}
+                    },R.layout.item_place,result?.success?.list as ArrayList<Building>,appCompositionRoot.mContext,appTheme,ZERO){t->}
                     rvInfo.adapter = genericAdapterItem
                     swipeRefresh.isRefreshing = false
                 }
