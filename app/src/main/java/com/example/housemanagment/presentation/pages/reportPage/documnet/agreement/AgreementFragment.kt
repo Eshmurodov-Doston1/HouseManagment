@@ -11,11 +11,13 @@ import com.example.housemanagment.databinding.FragmentAgreementBinding
 import com.example.housemanagment.models.activeContract.SendActive
 import com.example.housemanagment.models.soldData.Sold
 import com.example.housemanagment.presentation.pages.base.BasePage
+import com.example.housemanagment.utils.AppConstant.EMPTY
 import com.example.housemanagment.utils.AppConstant.ONE
 import com.example.housemanagment.utils.AppConstant.TWO
 import com.example.housemanagment.utils.AppConstant.ZERO
 import com.example.housemanagment.utils.extension.fetchResult
 import com.example.housemanagment.utils.extension.format
+import com.example.housemanagment.utils.extension.noData
 import com.example.housemanagment.utils.extension.textApp
 import com.example.housemanagment.vm.buildings.BuildingViewModel
 import kotlinx.coroutines.launch
@@ -46,26 +48,74 @@ class AgreementFragment : BasePage(R.layout.fragment_agreement) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             // TODO: Client data
-            clientName.textApp("${getStringData(R.string.full_name)} ${sold?.client?.fullName}")
-            clientAddress.textApp("${getStringData(R.string.address)} ${sold?.client?.address}")
-            clientPnfl.textApp("${getStringData(R.string.pnfl)} ${sold?.client?.pnfl}")
-            clientPassport.textApp("${getStringData(R.string.pnfl)} ${sold?.client?.passSeries}${sold?.client?.passNumber}")
-            clientEmail.textApp("${getStringData(R.string.email)} ${sold?.client?.email}")
-            clientPhone1.textApp("${getStringData(R.string.phone_number)} +${sold?.client?.phone}")
-            clientPhone2.textApp("${getStringData(R.string.phone_number)} +${sold?.client?.second_phone}")
+            var fullName:String?=appCompositionRoot.getNoData()
+            var address:String?=appCompositionRoot.getNoData()
+            var pnfl:String?=appCompositionRoot.getNoData()
+            var passSeries:String?=appCompositionRoot.getNoData()
+            var passNumber:String?=appCompositionRoot.getNoData()
+            var email:String?=appCompositionRoot.getNoData()
+            var phone:String?=appCompositionRoot.getNoData()
+            var second_phone:String?=appCompositionRoot.getNoData()
+            if (sold?.client!=null){
+              fullName = sold?.client?.fullName
+              address = sold?.client?.address
+              pnfl = sold?.client?.pnfl
+              passSeries = sold?.client?.passSeries
+              passNumber = sold?.client?.passNumber
+              email = sold?.client?.email
+              phone = sold?.client?.phone
+              second_phone = sold?.client?.second_phone
+            }
+
+            clientName.textApp("${getStringData(R.string.full_name)} ${fullName}")
+            clientAddress.textApp("${getStringData(R.string.address)} ${address}")
+            clientPnfl.textApp("${getStringData(R.string.pnfl)} ${pnfl}")
+            clientPassport.textApp("${getStringData(R.string.pnfl)} $passSeries${passNumber}")
+            clientEmail.textApp("${getStringData(R.string.email)} $email")
+            clientPhone1.textApp("${getStringData(R.string.phone_number)} +$phone")
+            clientPhone2.textApp("${getStringData(R.string.phone_number)} +$second_phone")
+
             // TODO: Building data
-            buildingName.textApp("${getStringData(R.string.client_name)} ${sold?.building?.name.toString()}")
-            buildingAddress.textApp("${getStringData(R.string.address)} ${sold?.building?.address}")
+
+            var buildingNameA:String?=appCompositionRoot.getNoData()
+            var addressBuilding:String?=appCompositionRoot.getNoData()
+
+            if (sold?.building!=null){
+                buildingNameA = sold?.building?.name
+                addressBuilding = sold?.building?.address
+            }
+            buildingName.textApp("${getStringData(R.string.client_name)} $buildingNameA")
+            buildingAddress.textApp("${getStringData(R.string.address)} $addressBuilding")
             // TODO:  Block Data
-            blockName.textApp("${getStringData(R.string.client_name)} ${sold?.blok?.name.toString()}")
+            var blockNameAp:String?=appCompositionRoot.getNoData()
+            if (sold?.blok!=null){
+                blockNameAp = sold?.blok?.name
+            }
+            blockName.textApp("${getStringData(R.string.client_name)} $blockNameAp")
             // TODO: Dom data
-            domName.textApp("${getStringData(R.string.client_name)} ${sold?.dom?.name.toString()}")
-            domFloor.textApp("${getStringData(R.string.build)} ${sold?.dom?.floor.toString()} ${getStringData(R.string.etaj)}")
+            var domNameApp:String?=appCompositionRoot.getNoData()
+            var floorFlatData:String?=appCompositionRoot.getNoData()
+            if (sold?.dom!=null){
+                domNameApp = sold?.dom?.name
+                floorFlatData = sold?.dom?.floor
+            }
+            domName.textApp("${getStringData(R.string.client_name)} $domNameApp")
+            domFloor.textApp("${getStringData(R.string.build)} ${floorFlatData} ${getStringData(R.string.etaj)}")
             // TODO: Flat data
-            flatName.textApp("${getStringData(R.string.flat_number)} ${getStringData(R.string.number)} ${sold?.house?.number.toString()}")
-            flatRooms.textApp("${getStringData(R.string.room_count)} ${sold?.house?.rooms.toString()}")
-            flatArea.textApp("${getStringData(R.string.apartment_area)} ${sold?.house?.area.toString()} ${getStringData(R.string.area_house)}")
-            flatPrice.textApp("${getStringData(R.string.flat_area)} ${getStringData(R.string.flat_summa)} ${sold?.house?.price?.toDouble()?.format()}")
+            var houseNumber:String?=appCompositionRoot.getNoData()
+            var houseRooms:String?=appCompositionRoot.getNoData()
+            var houseArea:String?=appCompositionRoot.getNoData()
+            var housePrice:Double?=0.0
+            if (sold?.house!=null){
+                houseNumber = sold?.house?.number
+                houseRooms = sold?.house?.rooms
+                houseArea = sold?.house?.area
+                housePrice = sold?.house?.price
+            }
+            flatName.textApp("${getStringData(R.string.flat_number)} ${getStringData(R.string.number)} $houseNumber")
+            flatRooms.textApp("${getStringData(R.string.room_count)} $houseRooms")
+            flatArea.textApp("${getStringData(R.string.apartment_area)} $houseArea ${getStringData(R.string.area_house)}")
+            flatPrice.textApp("${getStringData(R.string.flat_area)} ${getStringData(R.string.flat_summa)} $housePrice")
             // TODO: Pay
             var summaType:String?=null
             if (sold?.currency==ZERO){

@@ -191,6 +191,10 @@ class AppCompositionRoot(
         }
     }
 
+    fun getNoData():String{
+        return activity.getString(R.string.no_data)
+    }
+
 }
 
 

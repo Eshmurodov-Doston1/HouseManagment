@@ -21,11 +21,13 @@ import com.example.housemanagment.models.soldData.Sold
 import com.example.housemanagment.models.valutaCourse.CourseData
 import com.example.housemanagment.models.valutaCourse.CourseDataItem
 import com.example.housemanagment.uiTheme.AppTheme
+import com.example.housemanagment.utils.AppConstant.EMPTY
 import com.example.housemanagment.utils.AppConstant.ONE
 import com.example.housemanagment.utils.AppConstant.THREE
 import com.example.housemanagment.utils.AppConstant.TWO
 import com.example.housemanagment.utils.AppConstant.ZERO
 import com.example.housemanagment.utils.extension.format
+import com.example.housemanagment.utils.extension.noData
 import com.example.housemanagment.utils.extension.textApp
 import java.math.BigDecimal
 
@@ -245,10 +247,30 @@ open class GenericViewHolder<T>(itemView:View):RecyclerView.ViewHolder(itemView)
                     moneyType = context.getString(R.string.money_type)
                 }
 
-                binding.textNumber.textApp("${(sold.building?.name?:"")} ${sold.blok?.name} ${sold.dom?.name} ${context.getString(R.string.number_n)} ${sold.house?.number}")
-                binding.userName.textApp(sold.client?.fullName?:"")
-                binding.addressText.textApp(sold.client?.address?:"")
-                binding.passportText.textApp("${sold.client?.passSeries?:""}${sold.client?.passNumber?:""}")
+
+                var buildingName:String?=context.getString(R.string.no_data)
+                var blockName:String?=context.getString(R.string.no_data)
+                var domName:String?=context.getString(R.string.no_data)
+                var houseNumber:String?=context.getString(R.string.no_data)
+                if (sold.building !=null) buildingName = sold.building.name
+                if (sold.blok!=null) blockName = sold.blok.name
+                if (sold.dom!=null) domName = sold.dom.name
+                if (sold.house!=null) houseNumber = sold.house.number
+
+                binding.textNumber.textApp("$buildingName $blockName $domName ${context.getString(R.string.number_n)} $houseNumber")
+                var fullName:String?=context.getString(R.string.no_data)
+                var address:String?=context.getString(R.string.no_data)
+                var passSeries:String?=context.getString(R.string.no_data)
+                var passNumber:String?=context.getString(R.string.no_data)
+                if (sold.client!=null){
+                    fullName = sold.client.fullName
+                    address = sold.client.address
+                    passSeries = sold.client.passSeries
+                    passNumber = sold.client.passNumber
+                }
+                binding.userName.textApp(fullName.toString())
+                binding.addressText.textApp(address.toString())
+                binding.passportText.textApp("${passSeries.toString()}${passNumber.toString()}")
                 if (sold.payment_type.toInt() == ZERO){
                     binding.purchasedText.textApp(context.getString(R.string.installments))
                 }else if (sold.payment_type.toInt() == ONE){
@@ -256,7 +278,7 @@ open class GenericViewHolder<T>(itemView:View):RecyclerView.ViewHolder(itemView)
                 }
                 binding.paidAdvanceText.textApp("${bigDecimalFormat(sold.initial_paid)} $moneyType")
                 binding.paidOutText.textApp("${bigDecimalFormat(sold.paid)} $moneyType")
-                binding.squareText.textApp("${bigDecimalFormat(sold.house?.area?:"")} ${context.getString(R.string.area_house)}")
+                binding.squareText.textApp("${bigDecimalFormat(sold.house?.area?: EMPTY)} ${context.getString(R.string.area_house)}")
                 binding.debtText.textApp("${bigDecimalFormat(sold.loan)} $moneyType")
                 binding.allSum.textApp("${bigDecimalFormat(sold.summa)} $moneyType")
                 binding.callBtn.setOnClickListener{

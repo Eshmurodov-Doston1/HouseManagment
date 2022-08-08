@@ -191,3 +191,10 @@ fun <A: Activity> Activity.startNewActivity(activity:Class<A>){
         startActivity(it)
     }
 }
+fun String.noData(context: Context):String{
+    return if (this!=null && this.isNotEmpty() && this!=""){
+        this
+    }else{
+        context.getString(R.string.no_data)
+    }
+}

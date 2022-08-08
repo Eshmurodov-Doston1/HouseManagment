@@ -124,6 +124,7 @@
     <string name="price_data">Цена</string>
     <string name="price_flat_kv">Введите цену за квадратный метр дома</string>
     <string name="summ_flat_data">Количество денег</string>
+    <string name="no_data">Нет Данный</string>
 
 
 </resources>

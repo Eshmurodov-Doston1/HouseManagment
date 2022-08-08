@@ -7,7 +7,7 @@ data class House(
     val floor: Int,
     val id: Int,
     val number: String,
-    val price: Int,
+    val price: Double,
     val rooms: String,
     val status: Int,
     val updated_at: String
