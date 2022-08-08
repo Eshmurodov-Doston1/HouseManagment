@@ -3,18 +3,18 @@ package com.example.housemanagment.models.soldData
 import java.io.Serializable
 
 data class Sold(
-    val blok: Blok,
+    val blok: Blok?=null,
     val blok_id: Int,
-    val building: Building,
+    val building: Building?=null,
     val building_id: Int,
-    val client: Client,
+    val client: Client?=null,
     val client_id: Int,
     val created_at: String,
     val currency: Int,
-    val dom: Dom,
+    val dom: Dom?=null,
     val dom_id: Int,
     val home_id: Int,
-    val house: House,
+    val house: House?=null,
     val id: Int,
     val initial_paid: String,
     val is_active: Int,

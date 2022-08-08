@@ -245,10 +245,10 @@ open class GenericViewHolder<T>(itemView:View):RecyclerView.ViewHolder(itemView)
                     moneyType = context.getString(R.string.money_type)
                 }
 
-                binding.textNumber.textApp("${sold.building.name} ${sold.blok.name} ${sold.dom.name} ${context.getString(R.string.number_n)} ${sold.house.number}")
-                binding.userName.textApp(sold.client.fullName)
-                binding.addressText.textApp(sold.client.address)
-                binding.passportText.textApp("${sold.client.passSeries}${sold.client.passNumber}")
+                binding.textNumber.textApp("${(sold.building?.name?:"")} ${sold.blok?.name} ${sold.dom?.name} ${context.getString(R.string.number_n)} ${sold.house?.number}")
+                binding.userName.textApp(sold.client?.fullName?:"")
+                binding.addressText.textApp(sold.client?.address?:"")
+                binding.passportText.textApp("${sold.client?.passSeries?:""}${sold.client?.passNumber?:""}")
                 if (sold.payment_type.toInt() == ZERO){
                     binding.purchasedText.textApp(context.getString(R.string.installments))
                 }else if (sold.payment_type.toInt() == ONE){
@@ -256,7 +256,7 @@ open class GenericViewHolder<T>(itemView:View):RecyclerView.ViewHolder(itemView)
                 }
                 binding.paidAdvanceText.textApp("${bigDecimalFormat(sold.initial_paid)} $moneyType")
                 binding.paidOutText.textApp("${bigDecimalFormat(sold.paid)} $moneyType")
-                binding.squareText.textApp("${bigDecimalFormat(sold.house.area)} ${context.getString(R.string.area_house)}")
+                binding.squareText.textApp("${bigDecimalFormat(sold.house?.area?:"")} ${context.getString(R.string.area_house)}")
                 binding.debtText.textApp("${bigDecimalFormat(sold.loan)} $moneyType")
                 binding.allSum.textApp("${bigDecimalFormat(sold.summa)} $moneyType")
                 binding.callBtn.setOnClickListener{

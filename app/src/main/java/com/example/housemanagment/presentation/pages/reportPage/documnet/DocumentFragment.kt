@@ -152,7 +152,7 @@ class DocumentFragment : BasePage(R.layout.fragment_document) {
                                    appCompositionRoot.screenNavigator.createAgreement(sold)
                                 }
                             },R.layout.item_agreement_flat,listAgreement,requireContext(),appTheme1){posData->
-                                appCompositionRoot.call("+${posData.client.phone}")
+                                appCompositionRoot.call("+${posData.client?.phone}")
                             }
 
                             consToolbar.visible()
@@ -218,10 +218,10 @@ class DocumentFragment : BasePage(R.layout.fragment_document) {
     fun searchAgreement(text:String){
         var listAgreementSearch = ArrayList<Sold>()
         listAgreement.onEach {
-            if (it.building.name.lowercase().contains(text.lowercase()) ||
-                it.blok.name.lowercase().contains(text.lowercase()) ||
-                it.house.number.lowercase().contains(text.lowercase()) ||
-                it.dom.name.lowercase().contains(text.lowercase())){
+            if (it.building?.name?.lowercase()?.contains(text.lowercase()) == true ||
+                it.blok?.name?.lowercase()?.contains(text.lowercase()) == true ||
+                it.house?.number?.lowercase()?.contains(text.lowercase()) == true ||
+                it.dom?.name?.lowercase()?.contains(text.lowercase()) == true){
                 listAgreementSearch.add(it)
             }
         }
