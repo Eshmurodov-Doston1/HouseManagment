@@ -27,6 +27,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.flow.StateFlow
 import org.json.JSONObject
+import java.math.BigDecimal
 import java.util.*
 
 
@@ -42,9 +43,8 @@ suspend inline fun <reified T> StateFlow<ResponseState<T>>.fetchResult(
             }
             is ResponseState.Success -> {
                 uiController.hideProgress()
-                val jsonObject = JSONObject(Gson().toJson(result.data))
-                val parseData = jsonObject.parseJsonInClass(T::class.java)
-                invokeSuccess.invoke(parseData)
+                val parseData = result.data?.parseJsonInClass(T::class.java)
+                invokeSuccess.invoke(parseData!!)
             }
             is ResponseState.Error -> {
                 uiController.hideProgress()
@@ -58,9 +58,10 @@ suspend inline fun <reified T> StateFlow<ResponseState<T>>.fetchResult(
 }
 
 
-inline fun <reified T> JSONObject.parseJsonInClass(classData:Class<T>):T{
+inline fun <reified T> Any.parseJsonInClass(classData:Class<T>):T{
     val gson = GsonBuilder()
-    return gson.create().fromJson(this.toString(),classData)
+    val toJson = gson.create().toJson(this)
+    return gson.create().fromJson(toJson.toString(),classData)
 }
 
 
@@ -176,10 +177,17 @@ fun Long.format():String{
     return formatter
 }
 
-
+fun Int.format():String{
+    val formatter =  NumberFormat.getNumberInstance(Locale.getDefault()).format(this)
+    return formatter
+}
+fun BigDecimal.format():String{
+    val formatter =  NumberFormat.getNumberInstance(Locale.getDefault()).format(this)
+    return formatter
+}
 fun <A: Activity> Activity.startNewActivity(activity:Class<A>){
     Intent(this,activity).also {
-        it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        it.flags = Intent.FLAG_ACTIVITY_NEW_TASK.or(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(it)
     }
 }

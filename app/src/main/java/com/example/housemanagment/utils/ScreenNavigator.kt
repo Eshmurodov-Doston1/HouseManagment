@@ -8,6 +8,7 @@ import com.example.housemanagment.models.blockData.Block
 import com.example.housemanagment.models.buildingData.Building
 import com.example.housemanagment.models.demoMenu.DemoMenu
 import com.example.housemanagment.models.house.House
+import com.example.housemanagment.models.soldData.Sold
 
 class ScreenNavigator(
     private val navController: NavController
@@ -47,12 +48,12 @@ class ScreenNavigator(
         navController.navigate(R.id.action_companyFragment_to_housesFragment,bundle,animationCreatePage())
     }
 
-    fun createFragmentFlatData(house: House, isView:Int){
+    fun createFragmentFlatData(house: String, isView:Int){
         var bundle = Bundle()
-        bundle.putSerializable("house",house)
+        bundle.putString("house",house)
         when(isView){
             0->{
-                navController.navigate(R.id.action_sectorFlatFragment_to_flatDataFragment,bundle,animationCreatePage())
+                navController.navigate(R.id.flatDataFragment,bundle,animationCreatePage())
             }
             1->{
                 navController.navigate(R.id.flatDataFragment,bundle,animationCreatePage())
@@ -70,5 +71,11 @@ class ScreenNavigator(
 
     fun popBackStack(){
         navController.popBackStack()
+    }
+
+    fun createAgreement(sold: Sold){
+        var bundle = Bundle()
+        bundle.putSerializable("sold",sold)
+        navController.navigate(R.id.action_documentFragment_to_agreementFragment,bundle,animationCreatePage())
     }
 }

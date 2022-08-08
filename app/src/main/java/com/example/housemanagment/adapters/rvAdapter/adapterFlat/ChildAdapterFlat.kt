@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.housemanagment.R
 import com.example.housemanagment.databinding.ItemChildFlatBinding
+import com.example.housemanagment.models.bookingData.Booking
 import com.example.housemanagment.models.house.House
 import com.example.housemanagment.uiTheme.AppTheme
 import com.example.housemanagment.utils.*
 import com.example.housemanagment.utils.AppConstant.ONE
+import com.example.housemanagment.utils.AppConstant.TWO
 import com.example.housemanagment.utils.AppConstant.ZERO
 import com.example.housemanagment.utils.extension.*
 import java.util.*
@@ -35,20 +37,9 @@ class ChildAdapterFlat(
                 itemChildFlatBinding.callBtn.setOnClickListener {
                     onItemClickListener.onItemClickCall(house, position)
                 }
-                itemChildFlatBinding.chatBtn.setOnClickListener {
-                    onItemClickListener.onItemClickCallSMS(house,position)
-                }
-
-                // Image zoom
-//                val builder: Zoomy.Builder = Zoomy.Builder(compositionRoot.mActivity)
-//                    .target(itemChildFlatBinding.image)
-//                    .enableImmersiveMode(false)
-//                    .animateZooming(true)
-//                builder.register()
-
-
                 itemChildFlatBinding.apply {
                     if(docPos==1){
+                        price.gone()
                         textNumber.textApp("${house.build} ${house.blok} №${house.number}")
                     }else{
                         textNumber.textApp("№${house.number}")
@@ -58,11 +49,23 @@ class ChildAdapterFlat(
                     addressHint.textApp(compositionRoot.mActivity.getString(R.string.floor))
                     adminName.textApp(house.rooms)
                     addressText.textApp(house.floor.toString())
-                    allSum.textApp(house.summa.format())
-                    paidOutText.textApp(house.paid.format())
+                    allSum.textApp(house.summa?.format().toString())
+                    paidOutText.textApp(house.paid?.format().toString())
 
 //                    var fmt =  SimpleDateFormat("yyyy-MM-dd")
 //                    var date = fmt.parse(house.created_at)
+
+                    if (house.status!= TWO && house.status!= ONE){
+                        booking.visible()
+                    }
+
+                    booking.setOnClickListener {
+                        onItemClickListener.onItemClickListenerBooking(listFlat[position],position,false)
+                    }
+
+                    price.setOnClickListener {
+                        onItemClickListener.onItemClickListenerBooking(listFlat[position],position,true)
+                    }
 
                     when(house.status){
                         ZERO->{
@@ -72,6 +75,10 @@ class ChildAdapterFlat(
                         ONE->{
                             radioStatus.buttonDrawable?.setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_ATOP)
                             goneView(itemChildFlatBinding, ONE)
+                        }
+                        TWO->{
+                            radioStatus.buttonDrawable?.setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP)
+                            goneView(itemChildFlatBinding, TWO)
                         }
                     }
                 }
@@ -121,7 +128,7 @@ class ChildAdapterFlat(
     interface OnItemClickListener{
         fun onItemClick(house: House,position: Int)
         fun onItemClickCall(house: House,position: Int)
-        fun onItemClickCallSMS(house: House,position: Int)
+        fun onItemClickListenerBooking(house: House,position: Int,isPrice:Boolean)
     }
 
     fun goneView(itemChildFlatFragment:ItemChildFlatBinding,position: Int){
@@ -136,6 +143,10 @@ class ChildAdapterFlat(
                     consData.visible()
                     purchasedHint.textApp(compositionRoot.mActivity.getString(R.string.status))
                     purchasedText.textApp(compositionRoot.mActivity.getString(R.string.sold_out))
+                }
+                TWO->{
+                    purchasedHint.textApp(compositionRoot.mActivity.getString(R.string.status))
+                    purchasedText.textApp(compositionRoot.mActivity.getString(R.string.booking_home))
                 }
             }
             allSummLinear.gone()

@@ -57,6 +57,7 @@
             android:layout_height="1dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.cardview.widget.CardView
+        android:id="@+id/card_cash"
         app:layout_constraintTop_toBottomOf="@id/cons_tool"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -66,7 +67,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content">
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:paddingVertical="@dimen/_5sdp"
+            android:paddingVertical="@dimen/_10sdp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ImageView
@@ -76,23 +77,25 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintHorizontal_bias="0.03"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"/>
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"/>
+
             <TextView
                 android:id="@+id/cash_tv"
-                android:textColor="@color/textColor"
-                android:textStyle="normal"
-                android:textSize="@dimen/_12sdp"
+                android:layout_width="316dp"
+                android:layout_height="33dp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_6sdp"
                 android:fontFamily="@font/inter_medium"
-                android:text=""
                 android:gravity="center|left"
-                app:layout_constraintTop_toTopOf="@id/icon_cash"
-                app:layout_constraintLeft_toRightOf="@id/icon_cash"
+                android:text=""
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="@id/icon_cash"
+                app:layout_constraintLeft_toRightOf="@id/icon_cash"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginHorizontal="@dimen/_6sdp"
-                android:layout_width="0dp"
-                android:layout_height="0dp"/>
+                app:layout_constraintTop_toTopOf="@id/icon_cash" />
 
             <ImageView
                 android:id="@+id/icon_card"
@@ -102,8 +105,8 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintHorizontal_bias="0.03"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"/>
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"/>
             <TextView
                 android:id="@+id/card_tv"
                 android:textColor="@color/textColor"
@@ -116,7 +119,8 @@
                 app:layout_constraintLeft_toRightOf="@id/icon_card"
                 app:layout_constraintBottom_toBottomOf="@id/icon_card"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginHorizontal="@dimen/_6sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_6sdp"
                 android:layout_width="0dp"
                 android:layout_height="0dp"/>
 
@@ -128,8 +132,8 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintHorizontal_bias="0.03"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"/>
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"/>
             <TextView
                 android:id="@+id/cash_bank_tv"
                 android:textColor="@color/textColor"
@@ -142,7 +146,8 @@
                 app:layout_constraintLeft_toRightOf="@id/icon_card_bank"
                 app:layout_constraintBottom_toBottomOf="@id/icon_card_bank"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginHorizontal="@dimen/_6sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_6sdp"
                 android:layout_width="0dp"
                 android:layout_height="0dp"/>
 
@@ -154,8 +159,8 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintHorizontal_bias="0.03"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"/>
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"/>
             <TextView
                 android:id="@+id/cash_and_card_tv"
                 android:textColor="@color/textColor"
@@ -168,27 +173,12 @@
                 app:layout_constraintLeft_toRightOf="@id/icon_card_and_cash"
                 app:layout_constraintBottom_toBottomOf="@id/icon_card_and_cash"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginHorizontal="@dimen/_6sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_6sdp"
                 android:layout_width="0dp"
                 android:layout_height="0dp"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-<!--    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
-<!--        android:id="@+id/refresh"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/cons_tool"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp">-->
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/rv_cash"-->
-<!--            tools:listitem="@layout/item_cash"-->
-<!--            android:padding="@dimen/_5sdp"-->
-<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"/>-->
-
-<!--    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
-
 </androidx.constraintlayout.widget.ConstraintLayout>

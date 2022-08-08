@@ -7,5 +7,5 @@ data class Block(
     val dom_count: Int,
     val id: Int,
     val name: String,
-    val summa: Int
+    val summa: Double
 ):Serializable

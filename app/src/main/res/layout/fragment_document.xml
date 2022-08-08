@@ -5,15 +5,20 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.pages.reportPage.documnet.DocumentFragment">
+
+    <include
+        android:id="@+id/include_course"
+        layout="@layout/shimmer_course"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
     <include
         android:id="@+id/include"
-        android:visibility="visible"
         layout="@layout/shimmer_doc"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     <include
         android:id="@+id/include_shim"
-        android:visibility="visible"
         layout="@layout/shimmer_sector_flat"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

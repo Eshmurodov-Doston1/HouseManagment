@@ -49,6 +49,7 @@
     <color name="image_cash_color">#4F587AEF</color>
     <color name="image_card_color">#FFE0E0</color>
     <color name="logout_color">#FF2525</color>
+    <color name="color_auth">#FF334BC6</color>
     <!--    LightTheme-->
 <!--DarkTheme-->
     <color name="backgroundDarkColor">#212025</color>

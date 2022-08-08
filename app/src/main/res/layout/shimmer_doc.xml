@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/cons_simmer"
+    android:visibility="gone"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer"

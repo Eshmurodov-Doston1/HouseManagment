@@ -10,6 +10,7 @@ import com.example.housemanagment.models.auth.auhtReq.AuthReq
 import com.example.housemanagment.models.logout.LogOutRes
 import com.example.housemanagment.network.rePository.ApiRepository
 import com.example.housemanagment.utils.AppConstant.API
+import com.example.housemanagment.utils.AppConstant.ERROR_INTERNET
 import com.example.housemanagment.utils.AppConstant.ERROR_NO_INTERNET
 import com.example.housemanagment.utils.AppConstant.JSON_APP
 import com.example.housemanagment.utils.AppConstant.LOGIN
@@ -23,6 +24,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.io.IOException
 import javax.inject.Inject
 @HiltViewModel
 class AuthViewModel @Inject constructor(
@@ -51,9 +53,14 @@ class AuthViewModel @Inject constructor(
                 var mapHeader = HashMap<String,String>()
                 mapHeader[HttpHeaders.CONTENT_TYPE] = JSON_APP
                 mapHeader[HttpHeaders.ACCEPT] = JSON_APP
-                authRepository.methodePOST<AuthReq,AuthResponse>(fullAuthUrl,authReq,mapHeader).
-                collect{ response->
-                    _authData.emit(response)
+                try {
+                    authRepository.methodePOST<AuthReq,AuthResponse>(fullAuthUrl,authReq,mapHeader).collect{ response->
+                        _authData.emit(response)
+                    }
+                }catch (e:IOException){
+                    _authData.emit(ResponseState.Error(ERROR_INTERNET))
+                }catch (e:Exception){
+                    _authData.emit(ResponseState.Error(e.hashCode(),e.message))
                 }
             }else{
                 _authData.emit(ResponseState.Error(ERROR_NO_INTERNET))
@@ -66,9 +73,15 @@ class AuthViewModel @Inject constructor(
         viewModelScope.launch {
             if (networkHelper.isNetworkConnected()){
                 _logOut.emit(ResponseState.Loading)
-                authRepository.methodePOSTnoBody<LogOutRes>("$BASE_URL$API$LOGOUT",getHeaderMap()).collect{ response->
+                try {
+                    authRepository.methodePOSTnoBody<LogOutRes>("$BASE_URL$API$LOGOUT",getHeaderMap()).collect{ response->
                         _logOut.emit(response)
                     }
+                }catch (e:IOException){
+                    _authData.emit(ResponseState.Error(e.hashCode(),e.message))
+                }catch (e:Exception){
+                    _authData.emit(ResponseState.Error(e.hashCode(),e.message))
+                }
             }else{
                 _logOut.emit(ResponseState.Error(ERROR_NO_INTERNET))
             }
@@ -80,18 +93,18 @@ class AuthViewModel @Inject constructor(
 
 
     /** userData table operation **/
-    suspend fun saveUserEntity(userEntity: UserEntity) =
+    fun saveUserEntity(userEntity: UserEntity) =
           authDaoRepository.saveUser(userEntity)
 
-    suspend fun updateUserEntity(userEntity: UserEntity) =
+    fun updateUserEntity(userEntity: UserEntity) =
         authDaoRepository.updateUserEntity(userEntity)
 
-    suspend fun deleteUserEntity(userEntity: UserEntity) =
+    fun deleteUserEntity(userEntity: UserEntity) =
         authDaoRepository.deleteUserEntity(userEntity)
 
     fun getUserEntity():UserEntity =  authDaoRepository.getUserEntity()
 
-    suspend fun deleteUserTable() = authDaoRepository.deleteTableUser()
+    fun deleteUserTable() = authDaoRepository.deleteTableUser()
 
     /** getHeader Auth **/
     fun getHeaderMap():HashMap<String,String>{

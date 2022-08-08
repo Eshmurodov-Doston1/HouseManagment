@@ -17,12 +17,15 @@ object AppConstant {
     const val TOKEN = "token"
     const val EMPTY=""
     const val ERROR_NO_INTERNET= -2
+    const val ERROR_INTERNET= -3
     /**TokenType**/
     const val TOKEN_TYPE = "Bearer"
     /** Api All Paths or url text **/
     const val API= "/api"
     const val LOGIN="/login"
     const val LOGOUT="/logout"
+    const val BOOKING="/house/bron/"
+    const val ACTIVE_CONTRACT="/house/active/"
     /**Building.kt list**/
     const val BUILDING_LIST = "/building/list"
     const val DOM_LIST = "/dom/list"
@@ -33,6 +36,7 @@ object AppConstant {
     const val TYPE_HTTP="Content-Type"
     const val JSON_APP = "application/json"
     const val ACCEPT = "Accept"
+    const val AGREEMENT = "/agreement"
     const val UN_AUTHORIZATION = 401
 
     const val CLIENT_CODE_START = 400
@@ -40,5 +44,10 @@ object AppConstant {
 
     const val SERVER_CODE_START = 500
     const val SERVER_CODE_END = 599
+    // Valuta Data CBU
+    const val CBU_URL = "http://cbu.uz/uzc/arkhiv-kursov-valyut/json/"
+    const val UZB = "UZB"
+    const val USD = "USD"
+    val emptyMap = HashMap<String,String>()
 
 }

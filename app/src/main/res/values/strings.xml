@@ -33,7 +33,9 @@
     <string name="floor">Пол:</string>
     <string name="sold_out">Распроданный</string>
     <string name="not_sold">Не продано</string>
+    <string name="booking_home">Забронировано</string>
     <string name="status">Статус:</string>
+    <string name="booking">Бронь</string>
 
 
     <string name="operator">Оператор:</string>
@@ -45,6 +47,7 @@
     <string name="left">Оставил:</string>
     <string name="duty">Долг:</string>
     <string name="debt">Задолженность:</string>
+    <string name="passport_ser">Паспорт серии:</string>
     <string name="debtText">Задолженность</string>
     <string name="price">Стоимость :</string>
     <string name="sector">Сектор :</string>
@@ -63,11 +66,13 @@
     <string name="all_paid">Всего к оплате</string>
     <string name="home_sum">Выплаченная сумма</string>
     <string name="money_type">сўм</string>
+    <string name="money_type_us">$</string>
     <string name="sold_out_flat">Распроданный апартаменты</string>
     <string name="logout_text">Выйти из аккаунта</string>
     <string name="day_mode">Дневной режим</string>
     <string name="language">Язык</string>
     <string name="no_internet_connection">Интернет-соединение недоступно</string>
+    <string name="internet_exception">Произошла ошибка Интернета</string>
     <string name="server_error">В настоящее время есть проблема с сервером, повторите попытку позже.</string>
     <string name="log_out">Вы хотите выйти из своей учетной записи?</string>
     <string name="yes">Да</string>
@@ -78,5 +83,47 @@
     <string name="category">Разделы</string>
     <string name="house_cat">Дома</string>
     <string name="flats">Квартиры</string>
+    <string name="contracts">Соглашения</string>
+    <string name="valuta">Обменный курс</string>
+    <string name="comment">Оставить комментарий</string>
+    <string name="comment_hint">Комментарий</string>
+    <string name="save">Сохранять</string>
+    <string name="client">Покупатель</string>
+    <string name="building">Строительство</string>
+    <string name="block">Блок</string>
+    <string name="dom">Дом</string>
+    <string name="payed">Платежи</string>
+    <string name="passport">Пасспорт:</string>
+    <string name="pnfl">Пинфл:</string>
+
+
+
+    <string name="client_name">Имя:</string>
+    <string name="installments">В рассрочку</string>
+    <string name="full_payment">Полная оплата</string>
+    <string name="number_n">№</string>
+    <string name="paid_advance">Оплачено заранее</string>
+    <string name="area_house">м²</string>
+    <string name="flat">Квартира</string>
+    <string name="email">Эл. адрес:</string>
+    <string name="phone_number">Номер телефона</string>
+    <string name="room_count">Количество комнат:</string>
+    <string name="flat_summa">1 м²:</string>
+    <string name="total_price">Итоговая цена:</string>
+    <string name="initial_paid">Начальный платный:</string>
+    <string name="paid_data">Оплаченный:</string>
+    <string name="loan">Заем:</string>
+    <string name="month">Месяс:</string>
+    <string name="build">Здания:</string>
+    <string name="etaj">этаж</string>
+    <string name="flat_number">Квартира номер:</string>
+    <string name="apartment_area">Квартира площадь:</string>
+    <string name="flat_area">Дома:</string>
+    <string name="check_contract">Вы принимаете это соглашение?</string>
+    <string name="cancel_contract">Вы отменяете это соглашение?</string>
+    <string name="price_data">Цена</string>
+    <string name="price_flat_kv">Введите цену за квадратный метр дома</string>
+    <string name="summ_flat_data">Количество денег</string>
+
 
 </resources>

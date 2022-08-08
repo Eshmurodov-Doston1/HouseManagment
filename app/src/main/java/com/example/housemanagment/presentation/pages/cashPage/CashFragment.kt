@@ -20,7 +20,6 @@ import kotlinx.coroutines.launch
 class CashFragment : BasePage(R.layout.fragment_cash) {
     private var _binding:FragmentCashBinding?=null
     private val binding get() = _binding!!
-    private lateinit var  rvGenericAdapterCashItem:RvGenericAdapter<CashItem>
     private val buildingViewModel:BuildingViewModel by viewModels()
       override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +44,11 @@ class CashFragment : BasePage(R.layout.fragment_cash) {
 
         binding.apply {
             buildingViewModel.getMoneyOperation()
+            cardCash.setCardBackgroundColor(appTheme1.itemCardColor(requireContext()))
+            cardTv.setTextColor(appTheme1.textColorApp(requireContext()))
+            cashTv.setTextColor(appTheme1.textColorApp(requireContext()))
+            cashBankTv.setTextColor(appTheme1.textColorApp(requireContext()))
+            cashAndCardTv.setTextColor(appTheme1.textColorApp(requireContext()))
            launch {
               buildingViewModel.moneyData.fetchResult(appCompositionRoot.uiControllerApp){ result->
                   cashTv.textApp("${requireActivity().getString(R.string.cash_t)} ${result?.success?.naqd?.toDouble()?.format().toString()}")

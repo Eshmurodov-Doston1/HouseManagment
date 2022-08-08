@@ -7,5 +7,5 @@ data class Building(
     val blok_count: Int,
     val id: Int,
     val name: String,
-    val summa: Int
+    val summa: Double
 ):Serializable

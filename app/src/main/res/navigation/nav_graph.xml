@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_documentFragment_to_companyFragment2"
             app:destination="@id/companyFragment" />
+        <action
+            android:id="@+id/action_documentFragment_to_agreementFragment"
+            app:destination="@id/agreementFragment" />
     </fragment>
     <fragment
         android:id="@+id/companyFragment"
@@ -58,4 +61,9 @@
             android:id="@+id/action_housesFragment_to_sectorFlatFragment"
             app:destination="@id/sectorFlatFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/agreementFragment"
+        android:name="com.example.housemanagment.presentation.pages.reportPage.documnet.agreement.AgreementFragment"
+        android:label="fragment_agreement"
+        tools:layout="@layout/fragment_agreement" />
 </navigation>

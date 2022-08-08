@@ -3,6 +3,7 @@ package com.example.housemanagment.presentation.pages.flatData
 import android.graphics.PorterDuff
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,10 +14,13 @@ import com.example.housemanagment.databinding.FragmentFlatDataBinding
 import com.example.housemanagment.models.flatData.Home
 import com.example.housemanagment.models.house.House
 import com.example.housemanagment.presentation.pages.base.BasePage
+import com.example.housemanagment.utils.AppConstant.USD
+import com.example.housemanagment.utils.AppConstant.UZB
 import com.example.housemanagment.utils.AppConstant.ZERO
 import com.example.housemanagment.utils.extension.*
 import com.example.housemanagment.vm.AuthViewModel
 import com.example.housemanagment.vm.buildings.BuildingViewModel
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import ir.androidexception.datatable.model.DataTableHeader
 import ir.androidexception.datatable.model.DataTableRow
@@ -26,12 +30,12 @@ import kotlinx.coroutines.launch
 private const val ARG_PARAM1 = "house"
 @AndroidEntryPoint
 class FlatDataFragment : BasePage(R.layout.fragment_flat_data) {
-    private var house: House? = null
+    private var house: String? = null
     private val buildingViewModel:BuildingViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            house = it.getSerializable(ARG_PARAM1) as House
+            house = it.getString(ARG_PARAM1)
         }
     }
     private var _binding:FragmentFlatDataBinding?=null
@@ -49,8 +53,9 @@ class FlatDataFragment : BasePage(R.layout.fragment_flat_data) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
+            var houseData = Gson().fromJson(house,House::class.java)
             listHomeData = ArrayList()
-            textToolbar.textApp("${appCompositionRoot.mActivity.getString(R.string.number)} ${house?.number.toString()}")
+            textToolbar.textApp("${appCompositionRoot.mActivity.getString(R.string.number)} ${houseData?.number.toString()}")
             back.setOnClickListener {
                 appCompositionRoot.screenNavigator.popBackStack()
             }
@@ -67,22 +72,32 @@ class FlatDataFragment : BasePage(R.layout.fragment_flat_data) {
             var all_sum = 0.0
             var home_sum = 0.0
 
-            buildingViewModel.getHomeData(house?.id?:0)
+
+
+            buildingViewModel.getHomeData(houseData?.id?:0)
 
             launch {
                 buildingViewModel.homeData.fetchResult(appCompositionRoot.uiControllerApp){ result->
-                    if (result?.success?.list?.isEmpty() == true){
-                        binding.includeApp.lottie.visible()
-                        binding.cardSum.gone()
-                    }
+                    binding.includeApp.lottie.gone()
+                    binding.cardSum.visible()
 
-                    result?.success?.list?.onEach { home->
-                        val row = DataTableRow.Builder()
-                            .value(home.month_id)
-                            .value(home.pending.toDouble().format() + requireActivity().getString(R.string.money_type))
-                            .value(home.paid.toDouble().format()+ requireActivity().getString(R.string.money_type))
-                            .build()
-                        rows.add(row)
+                    result?.list?.onEach { home->
+                        if (result.currency == UZB){
+                            val row = DataTableRow.Builder()
+                                .value(home.month_id)
+                                .value(home.pending.toDouble().format() +" "+ requireActivity().getString(R.string.money_type))
+                                .value(home.paid.toDouble().format() +" "+ requireActivity().getString(R.string.money_type))
+                                .build()
+                            rows.add(row)
+                        }else if (result.currency == USD){
+                            val row = DataTableRow.Builder()
+                                .value(home.month_id)
+                                .value(home.pending.toDouble().format() +" "+ requireActivity().getString(R.string.money_type_us))
+                                .value(home.paid.toDouble().format() +" "+ requireActivity().getString(R.string.money_type_us))
+                                .build()
+                            rows.add(row)
+                        }
+
                         all_sum += home.pending.toDouble()
                         home_sum += home.paid.toDouble()
                     }

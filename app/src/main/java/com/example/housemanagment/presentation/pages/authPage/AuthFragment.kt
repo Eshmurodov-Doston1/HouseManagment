@@ -3,6 +3,7 @@ package com.example.housemanagment.presentation.pages.authPage
 
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -73,9 +74,13 @@ class AuthFragment : BasePage(R.layout.fragment_auth) {
                     errorDialog(requireActivity().getString(R.string.password_length))
                 } else {
                     authViewModel.authData(AuthReq(login,password))
+
                     launch {
                         authViewModel.authData.fetchResult(appCompositionRootAuth.uiControllerApp) { authResponse->
-                            launch {
+                            // TODO: Firebae token get and send backend
+//                            appCompositionRootAuth.getFCMToken {
+//                                Log.e("Token", it )
+//                            }
                                 authResponse?.user.apply {
                                     authViewModel.saveUserEntity(UserEntity(
                                         this?.created_at ?: "",
@@ -84,7 +89,6 @@ class AuthFragment : BasePage(R.layout.fragment_auth) {
                                         this?.name.toString(), this?.role_as.toString(), this?.updated_at.toString()
                                     ))
                                 }
-                            }
                             authViewModel.sharedPreferences.token = authResponse?.token
                             appCompositionRootAuth.mActivity.startNewActivity(MainActivity::class.java)
                             appCompositionRootAuth.mActivity.finish()

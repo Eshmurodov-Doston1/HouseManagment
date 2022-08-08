@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -22,6 +23,7 @@ import com.example.housemanagment.uiTheme.AppTheme
 import com.example.housemanagment.utils.extension.textApp
 import com.example.housemanagment.utils.sharedPreference.MySharedPreferences
 import com.example.housemanagment.utils.uiController.UiController
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.permissionx.guolindev.PermissionX
 
@@ -166,6 +168,27 @@ class AppCompositionRoot(
                     createSettings()
                 }
             }
+    }
+
+
+    fun dialogComment(appTheme: AppTheme,dataComment:(str:String)->Unit){
+        dialogHelper.dialogComment(appTheme,dataComment)
+    }
+
+
+    fun dialogSumma(appTheme: AppTheme,dataComment:(str:String)->Unit){
+        dialogHelper.dialogSumma(appTheme,dataComment)
+    }
+
+    fun getFCMToken(
+        fcm:(fcmToken:String)->Unit
+    ){
+        FirebaseMessaging.getInstance().isAutoInitEnabled = true
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            val token = task.result
+            Log.e("FCM_TOKEN",token)
+            fcm.invoke(token)
+        }
     }
 
 }

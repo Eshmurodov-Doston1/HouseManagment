@@ -1,6 +1,7 @@
 package com.example.housemanagment.presentation.pages.reportPage
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ import com.example.housemanagment.utils.extension.gone
 import com.example.housemanagment.utils.extension.loadAnimation
 import com.example.housemanagment.utils.extension.visible
 import com.example.housemanagment.vm.buildings.BuildingViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ReportFragment : BasePage(R.layout.fragment_report) {
@@ -45,7 +47,6 @@ class ReportFragment : BasePage(R.layout.fragment_report) {
                 override fun onItemClick(demoMenu: DemoMenu, position: Int, layoutRes: Int) {
                     appCompositionRoot.screenNavigator.createScreenDocument(demoMenu)
                 }
-
             },R.layout.item_home_menu,getDemoMenu(),appCompositionRoot.mContext){t->}
             rvData.adapter = genericAdapterDemo
         }
@@ -54,16 +55,20 @@ class ReportFragment : BasePage(R.layout.fragment_report) {
     override fun syncTheme(appTheme: AppTheme) {
         super.syncTheme(appTheme)
         val appTheme1 = appTheme as com.example.housemanagment.uiTheme.AppTheme
-        getData(appTheme1,false)
+        try {
+            getData(appTheme1,false)
 
-        binding.apply {
-            swipeRefresh.setOnRefreshListener {
-                getData(appTheme1,true)
+            binding.apply {
+                swipeRefresh.setOnRefreshListener {
+                    getData(appTheme1,true)
+                }
+                binding.includeShimmer.linearShimmer.setBackgroundColor(appTheme1.backgroundColorApp(requireContext()))
+                binding.consReport.setBackgroundColor(appTheme1.backgroundColorApp(requireContext()))
+                binding.textView.setTextColor(appTheme1.textColorApp(requireContext()))
+                binding.consTool.setBackgroundColor(appTheme1.backgroundColorTool(requireContext()))
             }
-            binding.includeShimmer.linearShimmer.setBackgroundColor(appTheme1.backgroundColorApp(requireContext()))
-            binding.consReport.setBackgroundColor(appTheme1.backgroundColorApp(requireContext()))
-            binding.textView.setTextColor(appTheme1.textColorApp(requireContext()))
-            binding.consTool.setBackgroundColor(appTheme1.backgroundColorTool(requireContext()))
+        }catch (e:Exception){
+            e.printStackTrace()
         }
     }
 
@@ -73,19 +78,24 @@ class ReportFragment : BasePage(R.layout.fragment_report) {
         binding.includeShimmer.linearShimmer.visible()
         binding.includeShimmer.shimmer.startShimmer()
         binding.apply {
-            launch {
+            launch(Dispatchers.Main){
                 buildingViewModel.getDataBuilding()
                 buildingViewModel.buildingData.fetchResult(appCompositionRoot.uiControllerApp){ result->
-                    includeShimmer.shimmer.stopShimmer()
-                    includeShimmer.linearShimmer.gone()
-                    if (result?.success?.list?.isEmpty() == true) binding.includeApp.lottie.visible()
-                    genericAdapterItem = RvGenericAdapter(object:RvGenericAdapter.OnItemClickListener<Building>{
-                        override fun onItemClick(demoMenu: Building, position: Int, layoutRes: Int) {
-                            appCompositionRoot.screenNavigator.createCompany(demoMenu)
-                        }
-                    },R.layout.item_place,result?.success?.list as ArrayList<Building>,appCompositionRoot.mContext,appTheme,ZERO){t->}
-                    rvInfo.adapter = genericAdapterItem
-                    swipeRefresh.isRefreshing = false
+                    try {
+                        includeShimmer.shimmer.stopShimmer()
+                        includeShimmer.linearShimmer.gone()
+                        if (result?.success?.list?.isEmpty() == true) binding.includeApp.lottie.visible()
+                        genericAdapterItem = RvGenericAdapter(object:RvGenericAdapter.OnItemClickListener<Building>{
+                            override fun onItemClick(demoMenu: Building, position: Int, layoutRes: Int) {
+                                appCompositionRoot.screenNavigator.createCompany(demoMenu)
+                            }
+                        },R.layout.item_place,result?.success?.list as ArrayList<Building>,appCompositionRoot.mContext,appTheme,ZERO){t->}
+
+                        rvInfo.adapter = genericAdapterItem
+                        swipeRefresh.isRefreshing = false
+                    }catch (e:Exception){
+                     e.printStackTrace()
+                    }
                 }
             }
             viewCons.visible()

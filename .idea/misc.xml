@@ -8,10 +8,13 @@
         <entry key="app/src/main/res/drawable-v24/bottom_sheet_dialog.xml" value="0.2175" />
         <entry key="app/src/main/res/drawable-v24/chat_back_from.xml" value="0.2175" />
         <entry key="app/src/main/res/drawable-v24/chat_back_to.xml" value="0.2175" />
+        <entry key="app/src/main/res/drawable/app_splash.xml" value="0.1925" />
         <entry key="app/src/main/res/drawable/back_dialog.xml" value="0.1995" />
         <entry key="app/src/main/res/drawable/back_edite_text.xml" value="0.1995" />
         <entry key="app/src/main/res/drawable/background.xml" value="0.2175" />
         <entry key="app/src/main/res/drawable/button_back.xml" value="0.1995" />
+        <entry key="app/src/main/res/drawable/button_background.xml" value="0.2305" />
+        <entry key="app/src/main/res/drawable/button_cancel.xml" value="0.2305" />
         <entry key="app/src/main/res/drawable/card_and_cash.xml" value="0.2175" />
         <entry key="app/src/main/res/drawable/dialog_cancel_btn.xml" value="0.1995" />
         <entry key="app/src/main/res/drawable/dialog_ok_btn.xml" value="0.165" />
@@ -20,19 +23,25 @@
         <entry key="app/src/main/res/drawable/ic_cash_icon.xml" value="0.2175" />
         <entry key="app/src/main/res/drawable/ic_chat.xml" value="0.2175" />
         <entry key="app/src/main/res/drawable/ic_clear_text.xml" value="0.2175" />
+        <entry key="app/src/main/res/drawable/ic_dollar.xml" value="0.206" />
         <entry key="app/src/main/res/drawable/ic_empty_image_icon.xml" value="0.2175" />
+        <entry key="app/src/main/res/drawable/ic_group_3.xml" value="0.206" />
         <entry key="app/src/main/res/drawable/ic_kassa.xml" value="0.1995" />
+        <entry key="app/src/main/res/drawable/ic_logo.xml" value="0.159" />
+        <entry key="app/src/main/res/drawable/ic_valuta.xml" value="0.206" />
         <entry key="app/src/main/res/drawable/logout_back.xml" value="0.2175" />
         <entry key="app/src/main/res/drawable/place_holder.xml" value="0.206" />
         <entry key="app/src/main/res/drawable/place_holdert.xml" value="0.2175" />
         <entry key="app/src/main/res/drawable/progress_style.xml" value="0.1995" />
         <entry key="app/src/main/res/drawable/shimmer_text_bac.xml" value="0.1995" />
+        <entry key="app/src/main/res/layout-v28/item_course.xml" value="0.375" />
         <entry key="app/src/main/res/layout-v28/item_info.xml" value="0.3380208333333333" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/cash_item_rv.xml" value="0.33697916666666666" />
         <entry key="app/src/main/res/layout/cash_item_summ.xml" value="0.33697916666666666" />
         <entry key="app/src/main/res/layout/chat_dialog.xml" value="0.33697916666666666" />
+        <entry key="app/src/main/res/layout/comment_dialog.xml" value="0.33" />
         <entry key="app/src/main/res/layout/create_image_flat.xml" value="0.33697916666666666" />
         <entry key="app/src/main/res/layout/custom_toas.xml" value="0.3380208333333333" />
         <entry key="app/src/main/res/layout/dialog_other.xml" value="0.25" />
@@ -40,6 +49,7 @@
         <entry key="app/src/main/res/layout/employe_item.xml" value="0.33697916666666666" />
         <entry key="app/src/main/res/layout/empty_lottie.xml" value="0.33541666666666664" />
         <entry key="app/src/main/res/layout/error_dialog.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_agreement.xml" value="0.3380208333333333" />
         <entry key="app/src/main/res/layout/fragment_all_place.xml" value="0.3380208333333333" />
         <entry key="app/src/main/res/layout/fragment_auth.xml" value="0.3380208333333333" />
         <entry key="app/src/main/res/layout/fragment_cash.xml" value="0.25" />
@@ -52,12 +62,14 @@
         <entry key="app/src/main/res/layout/fragment_report.xml" value="0.20921985815602837" />
         <entry key="app/src/main/res/layout/fragment_sector_flat.xml" value="0.29583975346687214" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.34270833333333334" />
+        <entry key="app/src/main/res/layout/item_agreement_flat.xml" value="0.3380208333333333" />
         <entry key="app/src/main/res/layout/item_cash.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_cash_child.xml" value="0.3380208333333333" />
         <entry key="app/src/main/res/layout/item_chat.xml" value="0.33697916666666666" />
         <entry key="app/src/main/res/layout/item_chat_from.xml" value="0.3380208333333333" />
         <entry key="app/src/main/res/layout/item_chat_to.xml" value="0.3380208333333333" />
         <entry key="app/src/main/res/layout/item_child_flat.xml" value="0.33697916666666666" />
+        <entry key="app/src/main/res/layout/item_course.xml" value="0.33541666666666664" />
         <entry key="app/src/main/res/layout/item_flat.xml" value="0.3380208333333333" />
         <entry key="app/src/main/res/layout/item_home_menu.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_house.xml" value="0.3380208333333333" />
@@ -65,10 +77,13 @@
         <entry key="app/src/main/res/layout/item_main_child.xml" value="0.33697916666666666" />
         <entry key="app/src/main/res/layout/item_place.xml" value="0.33697916666666666" />
         <entry key="app/src/main/res/layout/item_place_company.xml" value="0.3380208333333333" />
+        <entry key="app/src/main/res/layout/loading_view.xml" value="0.33541666666666664" />
+        <entry key="app/src/main/res/layout/shimmer_course.xml" value="0.375" />
         <entry key="app/src/main/res/layout/shimmer_doc.xml" value="0.33697916666666666" />
         <entry key="app/src/main/res/layout/shimmer_employees.xml" value="0.3380208333333333" />
         <entry key="app/src/main/res/layout/shimmer_main.xml" value="0.33697916666666666" />
         <entry key="app/src/main/res/layout/shimmer_sector_flat.xml" value="0.3380208333333333" />
+        <entry key="app/src/main/res/layout/summa_dialog.xml" value="0.3380208333333333" />
         <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.3380208333333333" />
       </map>
     </option>

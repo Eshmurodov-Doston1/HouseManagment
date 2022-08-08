@@ -13,5 +13,5 @@ interface Holder<T> {
         context: Context,
         appTheme: AppTheme?,
         typePlease:Int?,
-        onClick:(T:Any)->Unit)
+        onClick:(T)->Unit)
 }

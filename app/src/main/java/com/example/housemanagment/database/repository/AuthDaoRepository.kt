@@ -8,17 +8,17 @@ class AuthDaoRepository @Inject constructor(
     private val userDao: UserDao
 ) {
     /** userDao **/
-    suspend fun saveUser(userEntity: UserEntity) =
+    fun saveUser(userEntity: UserEntity) =
         userDao.insert(userEntity)
 
 
-    suspend fun updateUserEntity(userEntity: UserEntity) =
+    fun updateUserEntity(userEntity: UserEntity) =
         userDao.update(userEntity)
 
-    suspend fun deleteUserEntity(userEntity: UserEntity) =
+    fun deleteUserEntity(userEntity: UserEntity) =
         userDao.delete(userEntity)
 
     fun getUserEntity():UserEntity = userDao.getUserEntity()
     /** userDao **/
-    suspend fun deleteTableUser() = userDao.deleteTable()
+    fun deleteTableUser() = userDao.deleteTable()
 }

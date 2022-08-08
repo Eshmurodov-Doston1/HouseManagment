@@ -49,8 +49,8 @@ class AuthActivity : ThemeActivity(),UiController {
         else  window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         window?.statusBarColor = appTheme1.backgroundColorApp(this)
         window?.navigationBarColor = appTheme1.backgroundColorApp(this)
-        binding.loadingCard.setCardBackgroundColor(appTheme1.backgroundColorTool(this))
-        binding.textLoading.setTextColor(appTheme1.textColorApp(this))
+        binding.includeLoading.loadingCard.setCardBackgroundColor(appTheme1.backgroundColorTool(this))
+        binding.includeLoading.textLoading.setTextColor(appTheme1.textColorApp(this))
     }
 
     override fun onDestroy() {
@@ -63,11 +63,11 @@ class AuthActivity : ThemeActivity(),UiController {
     }
 
     override fun showProgress() {
-        binding.loading.visible()
+        binding.includeLoading.loading.visible()
     }
 
     override fun hideProgress() {
-        binding.loading.gone()
+        binding.includeLoading.loading.gone()
     }
 
     override fun  error(errorCode:Long,errorMessage:String) {

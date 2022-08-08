@@ -17,6 +17,9 @@ import com.example.housemanagment.models.demoMenu.DemoMenu
 import com.example.housemanagment.models.demoMenu.cash.CashItem
 import com.example.housemanagment.models.demoMenu.employe.Employee
 import com.example.housemanagment.models.flat.Flat
+import com.example.housemanagment.models.soldData.Sold
+import com.example.housemanagment.models.valutaCourse.CourseData
+import com.example.housemanagment.models.valutaCourse.CourseDataItem
 import com.example.housemanagment.uiTheme.AppTheme
 import com.example.housemanagment.utils.AppConstant.ONE
 import com.example.housemanagment.utils.AppConstant.THREE
@@ -24,6 +27,7 @@ import com.example.housemanagment.utils.AppConstant.TWO
 import com.example.housemanagment.utils.AppConstant.ZERO
 import com.example.housemanagment.utils.extension.format
 import com.example.housemanagment.utils.extension.textApp
+import java.math.BigDecimal
 
 class RvGenericAdapter<T:Any>(
     private val onItemClickListener: OnItemClickListener<T>,
@@ -32,7 +36,7 @@ class RvGenericAdapter<T:Any>(
     private val context:Context,
     private val appTheme: AppTheme?=null,
     private val typePlease:Int?=null,
-    private val onClick:(T:Any)->Unit
+    private val onClick:(T)->Unit
 ):RecyclerView.Adapter<GenericViewHolder<T>>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenericViewHolder<T> {
         var item = LayoutInflater.from(parent.context).inflate(layoutRes, parent, false)
@@ -72,10 +76,25 @@ open class GenericViewHolder<T>(itemView:View):RecyclerView.ViewHolder(itemView)
         context: Context,
         appTheme: AppTheme?,
         typePlease: Int?,
-        onClick: (T: Any) -> Unit
+        onClick: (T) -> Unit
     ) {
         when(layoutRes){
-
+            R.layout.item_course->{
+                itemView.animation = loadAnimation(context)
+                val itemCourseBinding = ItemCourseBinding.bind(itemView)
+                val courseDataItem = data as CourseDataItem
+                itemCourseBinding.textItem.textApp(courseDataItem.CcyNm_RU)
+                itemCourseBinding.date.textApp(courseDataItem.Date)
+                itemCourseBinding.valutaType.textApp(courseDataItem.Ccy)
+                itemCourseBinding.valutaSum.textApp(courseDataItem.Rate.toDouble().format())
+                if (appTheme!=null) {
+                    itemCourseBinding.cardCurrency.setCardBackgroundColor(appTheme.itemCardColor(itemView.context))
+                    itemCourseBinding.date.setTextColor(appTheme.textColorApp(itemView.context))
+                    itemCourseBinding.textItem.setTextColor(appTheme.textColorApp(itemView.context))
+                    itemCourseBinding.valutaType.setTextColor(appTheme.textColorApp(itemView.context))
+                    itemCourseBinding.valutaSum.setTextColor(appTheme.textColorApp(itemView.context))
+                }
+            }
             R.layout.item_house->{
                 itemView.animation = loadAnimation(context)
                 var itemPlaceBinding = ItemPlaceBinding.bind(itemView)
@@ -151,7 +170,8 @@ open class GenericViewHolder<T>(itemView:View):RecyclerView.ViewHolder(itemView)
                 val placeData = data as Building
                 itemPlaceBinding.name.textApp(placeData.name)
                 itemPlaceBinding.quantity.textApp("${context.getString(R.string.quantity)} ${placeData.blok_count}")
-                itemPlaceBinding.summ.textApp("${context.getString(R.string.pay)} ${placeData.summa.toDouble().format()}")
+                val format = BigDecimal(placeData.summa.toString()).toDouble().format()
+                itemPlaceBinding.summ.textApp("${context.getString(R.string.pay)} $format")
                 itemPlaceBinding.card.setOnClickListener {
                     onItemClickListener.onItemClick(data,position,layoutRes)
                 }
@@ -211,7 +231,70 @@ open class GenericViewHolder<T>(itemView:View):RecyclerView.ViewHolder(itemView)
                     }
                 }
             }
+
+
+            R.layout.item_agreement_flat->{
+                val binding = ItemAgreementFlatBinding.bind(itemView)
+                val sold = data as Sold
+                var moneyType: String?
+                if (sold.currency==0){
+                    // dollar
+                    moneyType = context.getString(R.string.money_type_us)
+                }else{
+                    // so'm
+                    moneyType = context.getString(R.string.money_type)
+                }
+
+                binding.textNumber.textApp("${sold.building.name} ${sold.blok.name} ${sold.dom.name} ${context.getString(R.string.number_n)} ${sold.house.number}")
+                binding.userName.textApp(sold.client.fullName)
+                binding.addressText.textApp(sold.client.address)
+                binding.passportText.textApp("${sold.client.passSeries}${sold.client.passNumber}")
+                if (sold.payment_type.toInt() == ZERO){
+                    binding.purchasedText.textApp(context.getString(R.string.installments))
+                }else if (sold.payment_type.toInt() == ONE){
+                    binding.purchasedText.textApp(context.getString(R.string.full_payment))
+                }
+                binding.paidAdvanceText.textApp("${bigDecimalFormat(sold.initial_paid)} $moneyType")
+                binding.paidOutText.textApp("${bigDecimalFormat(sold.paid)} $moneyType")
+                binding.squareText.textApp("${bigDecimalFormat(sold.house.area)} ${context.getString(R.string.area_house)}")
+                binding.debtText.textApp("${bigDecimalFormat(sold.loan)} $moneyType")
+                binding.allSum.textApp("${bigDecimalFormat(sold.summa)} $moneyType")
+                binding.callBtn.setOnClickListener{
+                    onClick.invoke(data)
+                }
+                if (appTheme!=null){
+                    binding.textNumber.setTextColor(appTheme.textColorApp(context))
+                    binding.userName.setTextColor(appTheme.textColorApp(context))
+                    binding.addressText.setTextColor(appTheme.textColorApp(context))
+                    binding.passportText.setTextColor(appTheme.textColorApp(context))
+                    binding.purchasedText.setTextColor(appTheme.textColorApp(context))
+                    binding.paidAdvanceText.setTextColor(appTheme.textColorApp(context))
+                    binding.paidOutText.setTextColor(appTheme.textColorApp(context))
+                    binding.squareText.setTextColor(appTheme.textColorApp(context))
+                    binding.debtText.setTextColor(appTheme.textColorApp(context))
+                    binding.allSum.setTextColor(appTheme.textColorApp(context))
+                    binding.cardChild.setCardBackgroundColor(appTheme.itemCardColor(context))
+                    binding.textNumber.setTextColor(appTheme.textColorApp(context))
+                    // hint
+                    binding.userHint.setTextColor(appTheme.hintColor(context))
+                    binding.addressHint.setTextColor(appTheme.hintColor(context))
+                    binding.passportHint.setTextColor(appTheme.hintColor(context))
+                    binding.purchasedHint.setTextColor(appTheme.hintColor(context))
+                    binding.paidAdvanceHint.setTextColor(appTheme.hintColor(context))
+                    binding.paidOutHint.setTextColor(appTheme.hintColor(context))
+                    binding.squareHint.setTextColor(appTheme.hintColor(context))
+                    binding.debtHint.setTextColor(appTheme.hintColor(context))
+                    binding.allSumHint.setTextColor(appTheme.hintColor(context))
+                }
+                binding.cardChild.setOnClickListener {
+                    onItemClickListener.onItemClick(data,position,layoutRes)
+                }
+            }
         }
+    }
+
+    fun bigDecimalFormat(str:String):String{
+       return BigDecimal(str).format()
     }
 
 }

@@ -2,8 +2,8 @@ package com.example.housemanagment.presentation.activitys
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.dolatkia.animatedThemeManager.AppTheme
@@ -21,6 +21,7 @@ import com.example.housemanagment.utils.uiController.UiController
 import com.example.housemanagment.vm.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class MainActivity : ThemeActivity(), UiController,DroidListener {
 
@@ -36,9 +37,9 @@ class MainActivity : ThemeActivity(), UiController,DroidListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        mDroidNet = DroidNet.getInstance();
-        mDroidNet?.addInternetConnectivityListener(this);
+        setContentView(_binding!!.root)
+        mDroidNet = DroidNet.getInstance()
+        mDroidNet?.addInternetConnectivityListener(this)
         var navController = supportFragmentManager.findFragmentById(R.id.fragment_main) as NavHostFragment
         appCompositionRoot = AppCompositionRoot(this,navController.navController,this,authViewModel.sharedPreferences)
     }
@@ -50,12 +51,13 @@ class MainActivity : ThemeActivity(), UiController,DroidListener {
         binding.consBack.setBackgroundColor(appTheme1.backgroundColorApp(this))
         window?.statusBarColor = appTheme1.backgroundColorTool(this)
         window?.navigationBarColor = appTheme1.backgroundColorTool(this)
+        binding.includeLoading.loadingCard.setCardBackgroundColor(appTheme1.itemCardColor(this))
+        binding.includeLoading.textLoading.setTextColor(appTheme1.textColorApp(this))
     }
 
     override fun onDestroy() {
         super.onDestroy()
         mDroidNet?.removeInternetConnectivityChangeListener(this)
-        _binding=null
     }
 
     override fun onNavigateUp(): Boolean {
@@ -63,21 +65,21 @@ class MainActivity : ThemeActivity(), UiController,DroidListener {
     }
 
     override fun showProgress() {
-
+        binding.includeLoading.loading.visible()
     }
 
     override fun hideProgress() {
-
+        binding.includeLoading.loading.gone()
     }
 
     override fun error(errorCode: Long, errorMessage: String) {
-
+        appCompositionRoot.errorDialog(errorMessage, errorCode.toInt()){isClick->}
     }
 
     override fun onInternetConnectivityChanged(isConnected: Boolean) {
         if (isConnected) {
             //do Stuff with internet
-         binding.noInternet.gone()
+            binding.noInternet.gone()
         } else {
             //no internet
             binding.noInternet.visible()

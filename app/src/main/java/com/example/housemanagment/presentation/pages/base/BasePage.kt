@@ -162,51 +162,10 @@ open class BasePage(
         var listDemoMenu = ArrayList<DemoMenu>()
         listDemoMenu.add(DemoMenu(context?.getString(R.string.all_home).toString(),R.drawable.ic_home,ContextCompat.getColor(requireContext(),R.color.main_card_first_color),ZERO))
         listDemoMenu.add(DemoMenu(context?.getString(R.string.sold_out_flat).toString(),R.drawable.ic_group_3,ContextCompat.getColor(requireContext(),R.color.main_card_second_color), ONE))
+        listDemoMenu.add(DemoMenu(context?.getString(R.string.contracts).toString(),R.drawable.ic_four,ContextCompat.getColor(requireContext(),R.color.main_card_four_color), TWO))
+        listDemoMenu.add(DemoMenu(context?.getString(R.string.valuta).toString(),R.drawable.ic_currency,ContextCompat.getColor(requireContext(),R.color.image_empty_color), THREE))
         return listDemoMenu
     }
-
-
-    fun getCash():ArrayList<CashItem>{
-        var listCash = ArrayList<CashItem>()
-            // naqd Pul
-        listCash.add(CashItem(12000000.0,"12.01.2022","Dostonbek Eshmurodov",0))
-        // Carta orqali
-        listCash.add(CashItem(12000000.0,"12.05.2022","Dostonbek Eshmurodov",1))
-        // Birlashgan to'lov
-        listCash.add(CashItem(12000000.0,"12.05.2022","Dostonbek Eshmurodov",2))
-        // naqd Pul
-        listCash.add(CashItem(12000000.0,"12.01.2022","Dostonbek Eshmurodov",0))
-        // Carta orqali
-        listCash.add(CashItem(12000000.0,"12.05.2022","Dostonbek Eshmurodov",1))
-        // Birlashgan to'lov
-        listCash.add(CashItem(12000000.0,"12.05.2022","Dostonbek Eshmurodov",2))
-        return listCash
-    }
-
-
-
-
-    fun getPlaceData():ArrayList<PlaceData>{
-        var listPlace = ArrayList<PlaceData>()
-        listPlace.add(PlaceData("Nest One",121,312491658.0))
-        listPlace.add(PlaceData("Yangi choshtepa",121,312491658.0))
-        listPlace.add(PlaceData("Toshkent City",121,312491658.0))
-        listPlace.add(PlaceData("Qorasuv",121,312491658.0))
-        listPlace.add(PlaceData("Nest One",121,312491658.0))
-        listPlace.add(PlaceData("Yangi choshtepa",121,312491658.0))
-        listPlace.add(PlaceData("Toshkent City",121,312491658.0))
-        listPlace.add(PlaceData("Qorasuv",121,312491658.0))
-        listPlace.add(PlaceData("Nest One",121,312491658.0))
-        listPlace.add(PlaceData("Yangi choshtepa",121,312491658.0))
-        listPlace.add(PlaceData("Toshkent City",121,312491658.0))
-        listPlace.add(PlaceData("Qorasuv",121,312491658.0))
-        listPlace.add(PlaceData("Nest One",121,312491658.0))
-        listPlace.add(PlaceData("Yangi choshtepa",121,312491658.0))
-        listPlace.add(PlaceData("Toshkent City",121,312491658.0))
-        listPlace.add(PlaceData("Qorasuv",121,312491658.0))
-        return listPlace
-    }
-
 
 
     fun getEmployee():ArrayList<Employee>{

@@ -1,5 +1,6 @@
 package com.example.housemanagment.models.house
 
+import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class House(
@@ -10,8 +11,11 @@ data class House(
     val floor: Int,
     val id: Int,
     val number: String,
-    val paid: Double,
+    @SerializedName("paid")
+    val paid: Double?=0.0,
     val rooms: String,
     val status: Int,
-    val summa: Double
+    @SerializedName("summa")
+    val summa: Double?=0.0,
+    val phone:String
 ):Serializable

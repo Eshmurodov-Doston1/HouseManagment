@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/comment_dialog_cons"
+        android:layout_width="@dimen/_280sdp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back_dialog"
+        android:paddingVertical="@dimen/_10sdp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/text_comment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_6sdp"
+            android:fontFamily="@font/inter_medium"
+            android:gravity="center"
+            android:text="@string/comment"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="normal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/comment"
+            android:textSize="@dimen/_11sdp"
+            android:textColor="@color/textColor"
+            android:textStyle="normal"
+            android:fontFamily="@font/inter_medium"
+            android:hint="@string/comment_hint"
+            android:layout_width="0dp"
+            android:paddingVertical="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:paddingHorizontal="@dimen/_6sdp"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/_60sdp"
+            android:gravity="left"
+            android:background="@drawable/back_edite_text"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_comment"
+            app:layout_constraintWidth_percent="0.96" />
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/comment"
+            app:layout_constraintLeft_toLeftOf="@id/comment"
+            app:layout_constraintRight_toRightOf="@id/comment"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_30sdp">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/cancel"
+                android:textStyle="normal"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:text="@string/cancel"
+                android:textAllCaps="false"
+                android:fontFamily="@font/inter_medium"
+                android:background="@drawable/button_cancel"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/save"
+                android:textStyle="normal"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:text="@string/save"
+                android:textAllCaps="false"
+                android:fontFamily="@font/inter_medium"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:background="@drawable/button_background"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
