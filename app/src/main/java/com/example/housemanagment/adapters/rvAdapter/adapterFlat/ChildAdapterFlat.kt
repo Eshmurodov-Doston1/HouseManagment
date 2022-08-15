@@ -49,14 +49,18 @@ class ChildAdapterFlat(
                     addressHint.textApp(compositionRoot.mActivity.getString(R.string.floor))
                     adminName.textApp(house.rooms)
                     addressText.textApp(house.floor.toString())
-                    allSum.textApp(house.summa?.format().toString())
+                    var houseSumma:Double?=0.0
+                    if (house.summa!=null) houseSumma = house.summa
+                    allSum.textApp(houseSumma?.format().toString())
                     paidOutText.textApp(house.paid?.format().toString())
-
+                    squareSummaText.textApp(house.price.format())
+                    
 //                    var fmt =  SimpleDateFormat("yyyy-MM-dd")
 //                    var date = fmt.parse(house.created_at)
 
                     if (house.status!= TWO && house.status!= ONE){
                         booking.visible()
+                        price.visible()
                     }
 
                     booking.setOnClickListener {
@@ -123,6 +127,9 @@ class ChildAdapterFlat(
         itemChildFlatBinding.allSummHint.setTextColor(appTheme.textColorApp(itemView.context))
         itemChildFlatBinding.squareHint.setTextColor(appTheme.textColorApp(itemView.context))
         itemChildFlatBinding.squareText.setTextColor(appTheme.textColorApp(itemView.context))
+
+        itemChildFlatBinding.squareSummaText.setTextColor(appTheme.textColorApp(itemView.context))
+        itemChildFlatBinding.squareSummaHint.setTextColor(appTheme.hintColor(itemView.context))
     }
 
     interface OnItemClickListener{

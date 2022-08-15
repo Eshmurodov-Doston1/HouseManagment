@@ -139,8 +139,8 @@ class DocumentFragment : BasePage(R.layout.fragment_document) {
                         if (it.toString().isNotNullOrEmpty()) searchAgreement(it.toString()) else searchAgreement(EMPTY)
                     }
                     launch {
-                        listAgreement = ArrayList()
                         buildingViewModel.soldData.fetchResult(appCompositionRoot.uiControllerApp){ result->
+                            listAgreement = ArrayList()
                             listAgreement.addAll(result?.list?: emptyList())
                             if (result?.list?.isEmpty() == true) binding.includeApp.lottie.visible()
                             rvAgreement = RvGenericAdapter(object:RvGenericAdapter.OnItemClickListener<Sold>{

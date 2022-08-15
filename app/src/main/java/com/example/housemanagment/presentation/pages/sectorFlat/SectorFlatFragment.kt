@@ -80,9 +80,6 @@ class SectorFlatFragment : BasePage(R.layout.fragment_sector_flat) {
         super.syncTheme(appTheme)
         val appTheme1 = appTheme as com.example.housemanagment.uiTheme.AppTheme
         flatData(appTheme1)
-
-
-
     }
 
     fun flatData(appTheme: com.example.housemanagment.uiTheme.AppTheme){

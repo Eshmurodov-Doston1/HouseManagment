@@ -11,7 +11,7 @@
     <string name="not_available_password">Пароль недоступен</string>
     <string name="not_available_login">Логин  недоступен</string>
     <string name="password_length">Пароль должен быть не менее 6 символов</string>
-    <string name="loading">Loading...</string>
+    <string name="loading">Загрузка...</string>
     <string name="report">Отчёт</string>
     <string name="kassa">Кассы</string>
     <string name="employees">Сотрудники</string>
@@ -52,6 +52,7 @@
     <string name="price">Стоимость :</string>
     <string name="sector">Сектор :</string>
     <string name="square_meter">Квадрат метр :</string>
+    <string name="square_summa_meter">Квадрат метр цена :</string>
     <string name="permission_str">Основные принципы основаны на этих разрешениях</string>
     <string name="cancel">Отмена</string>
     <string name="hint_chat">Напиши сообщение...</string>

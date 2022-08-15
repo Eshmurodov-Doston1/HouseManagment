@@ -17,5 +17,6 @@ data class House(
     val status: Int,
     @SerializedName("summa")
     val summa: Double?=0.0,
-    val phone:String
+    val phone:String,
+    val price:Double
 ):Serializable

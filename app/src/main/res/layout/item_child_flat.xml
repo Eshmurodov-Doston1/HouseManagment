@@ -260,7 +260,43 @@
                                 android:textStyle="bold" />
 
                         </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/square_summa_linear"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:visibility="visible">
 
+                            <TextView
+                                android:id="@+id/square_summa_hint"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_medium"
+                                android:maxLines="1"
+                                android:padding="@dimen/_2sdp"
+                                android:text="@string/square_summa_meter"
+                                android:textColor="@color/hintColor"
+                                android:textSize="@dimen/_9sdp"
+                                android:textStyle="normal" />
+
+                            <TextView
+                                android:id="@+id/square_summa_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_3sdp"
+                                android:layout_marginEnd="@dimen/_2sdp"
+                                android:layout_weight="1"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/inter_medium"
+                                android:maxLines="2"
+                                android:padding="@dimen/_2sdp"
+                                android:text="58 м²"
+                                android:textColor="@color/textColor"
+                                android:textSize="@dimen/_9sdp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
                         <LinearLayout
                             android:id="@+id/allSumm_linear"
                             android:layout_width="match_parent"
@@ -386,7 +422,7 @@
                         android:layout_height="@dimen/_30sdp"/>
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/price"
-                        android:visibility="visible"
+                        android:visibility="gone"
                         android:text="@string/price_data"
                         android:textSize="@dimen/_12sdp"
                         android:textColor="@color/white"
