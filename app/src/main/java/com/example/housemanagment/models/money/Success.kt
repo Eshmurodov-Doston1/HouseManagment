@@ -1,8 +1,8 @@
 package com.example.housemanagment.models.money
 
 data class Success(
-    val bank: Int,
-    val karta: Int,
-    val naqd: Int,
-    val summa: Int
+    val bank: Double,
+    val karta: Double,
+    val naqd: Double,
+    val summa: Double
 )

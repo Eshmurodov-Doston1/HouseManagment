@@ -51,10 +51,10 @@ class CashFragment : BasePage(R.layout.fragment_cash) {
             cashAndCardTv.setTextColor(appTheme1.textColorApp(requireContext()))
            launch {
               buildingViewModel.moneyData.fetchResult(appCompositionRoot.uiControllerApp){ result->
-                  cashTv.textApp("${requireActivity().getString(R.string.cash_t)} ${result?.success?.naqd?.toDouble()?.format().toString()}")
-                  cardTv.textApp("${requireActivity().getString(R.string.card_t)} ${result?.success?.karta?.toDouble()?.format().toString()}")
-                  cashBankTv.textApp("${requireActivity().getString(R.string.card_bank_t)} ${result?.success?.bank?.toDouble()?.format().toString()}")
-                  cashAndCardTv.textApp("${requireActivity().getString(R.string.card_and_cash_t)} ${result?.success?.summa?.toDouble()?.format().toString()}")
+                  cashTv.textApp("${requireActivity().getString(R.string.cash_t)} ${result?.success?.naqd?.format().toString()}")
+                  cardTv.textApp("${requireActivity().getString(R.string.card_t)} ${result?.success?.karta?.format().toString()}")
+                  cashBankTv.textApp("${requireActivity().getString(R.string.card_bank_t)} ${result?.success?.bank?.format().toString()}")
+                  cashAndCardTv.textApp("${requireActivity().getString(R.string.card_and_cash_t)} ${result?.success?.summa?.format().toString()}")
               }
            }
         }
