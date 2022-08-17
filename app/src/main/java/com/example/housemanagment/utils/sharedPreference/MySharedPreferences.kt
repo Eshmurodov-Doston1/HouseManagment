@@ -24,9 +24,7 @@ class MySharedPreferences @Inject constructor(
     }
 
     fun clear() {
-       var sharedEdit = sharedPreferences.edit()
-        sharedEdit.remove(TOKEN)
-        sharedEdit.apply()
+        sharedPreferences.edit().clear().apply()
     }
 
     /** Theme application **/
